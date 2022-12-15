@@ -6,6 +6,18 @@ var logger = require('morgan');
 
 var app = express();
 
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const io = new Server(server);
+
+io.on('connection', (socket) => {
+  console.log("user connected");
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
