@@ -12,12 +12,17 @@ module.exports = function(io) {
     );
 
     // read the user credentials from file
-    const tasks = JSON.parse(
-        fs.readFileSync('./data/experimentTasks.json')
+    const experiment = JSON.parse(
+        fs.readFileSync('./data/experiment.json')
     );
 
-    // keep track of task progression
-    const tasksCompleted = {};
+    // define space to save decisions
+    experiment.decisions = {};
+    Object.keys(experiment.assignments).forEach((user) => {
+        experiment.decisions[user] = Array(experiment.tasks.length).fill(
+            {"design": null, "strategy": null}
+        );
+    });
 
     let currentTaskIndex = -1;
 
@@ -32,9 +37,9 @@ module.exports = function(io) {
         
         function showDesignTask(context) {
             // retrieve the current task
-            let task = tasks[currentTaskIndex];
+            let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
             // compute the progress percentage
-            task.progress = Math.round(100*(currentTaskIndex+1)/tasks.length);
+            task.progress = Math.round(100*(currentTaskIndex+1)/(experiment.tasks.length+1));
             // send a socket.io show design task
             context.emit('show-design-task', task);
         }
@@ -55,11 +60,22 @@ module.exports = function(io) {
         }
 
         function showAdminScreen(context) {
+            let decisions = {};
+            Object.keys(experiment.decisions).forEach((user) => {
+                if (currentTaskIndex >= 0 && currentTaskIndex < experiment.tasks.length) {
+                    decisions[user] = {
+                        "task": experiment.tasks[experiment.assignments[user][currentTaskIndex]].label,
+                        "design": experiment.decisions[user][currentTaskIndex].design,
+                        "strategy": experiment.decisions[user][currentTaskIndex].strategy
+                    };
+                } else {
+                    decisions[user] = null;
+                }
+            });
             // send a socket.io show admin screen
             context.emit('show-admin-screen', {
-                "progress": progress = Math.round(100*(currentTaskIndex+1)/tasks.length),
-                "users": Object.keys(users),
-                "admins": Object.keys(admins)
+                "progress": progress = Math.round(100*(currentTaskIndex+1)/(experiment.tasks.length+1)),
+                "decisions": decisions
             });
         }
 
@@ -73,7 +89,7 @@ module.exports = function(io) {
             } else if (currentTaskIndex < 0) {
                 // if not ready to start, show wait screen
                 showWaitScreen(context);
-            } else if (currentTaskIndex < tasks.length) {
+            } else if (currentTaskIndex < experiment.tasks.length) {
                 // if incomplete, show next design task
                 showDesignTask(context);
             } else {
@@ -103,10 +119,6 @@ module.exports = function(io) {
             ) {
                 // authentication successful; update the authenticated username
                 username = request.username;
-                // ensure user has an entry in tasks completed
-                if (! (username in tasksCompleted) ) {
-                    tasksCompleted[username] = 0;
-                }
                 // register user socket
                 users[username] = socket;
                 // notify admins of new user
@@ -127,13 +139,17 @@ module.exports = function(io) {
             showContent(socket)
         });
 
-        socket.on('submit-design-request', (request) => {
+        socket.on('submit-decision', (request) => {
             if (username != null) {
-                // increment the number of tasks completed by this user
-                tasksCompleted[username] += 1;
-                // record the user
-                request.username = username;
-                console.log(request);
+                // save the task decision
+                experiment.decisions[username][currentTaskIndex] = {
+                    "design": request.design,
+                    "strategy": request.strategy,
+                }
+                // notify admins of new decision
+                Object.keys(admins).forEach(admin => {
+                    showAdminScreen(admins[admin]);
+                });
             }
         });
 
@@ -158,9 +174,19 @@ module.exports = function(io) {
             });
         });
 
+        // bind behavior to a socket.io return prev task
+        socket.on('return-prev', () => {
+            if (username in admins && currentTaskIndex >= 0) {
+                // increment the current task index
+                currentTaskIndex -= 1;
+                // request all clients to update content
+                io.emit("update-content");
+            }
+        });
+
         // bind behavior to a socket.io advance next task
-        socket.on('advance-next-task', () => {
-            if (username in admins) {
+        socket.on('advance-next', () => {
+            if (username in admins && currentTaskIndex < experiment.tasks.length) {
                 // increment the current task index
                 currentTaskIndex += 1;
                 // request all clients to update content

@@ -80,7 +80,7 @@ $(document).ready(function() {
         $("#design-button").prop("disabled", true);
         $("#design table").removeClass("table-hover");
         // send a socket.io request to submit the design
-        socket.emit("submit-design-request", {
+        socket.emit("submit-decision", {
             "task": $("#design .task-label").text(),
             "design": $("#design .table-active .design-label").text(),
             "strategy": $("#design .table-active").data("strategy"),
@@ -90,9 +90,15 @@ $(document).ready(function() {
     });
 
     // bind behavior to clicks on the logout link
-    $("#next-task-button").on("click", () => {
+    $("#next-button").on("click", () => {
         // send a socket.io request to advance to the next task
-        socket.emit("advance-next-task");
+        socket.emit("advance-next");
+    });
+
+    // bind behavior to clicks on the logout link
+    $("#prev-button").on("click", () => {
+        // send a socket.io request to advance to the next task
+        socket.emit("return-prev");
     });
 
     // bind behavior to the socket.io logout response
@@ -124,8 +130,33 @@ $(document).ready(function() {
         $("#admin .progress-bar").css("width", response.progress + "%");
         // reset table rows
         $("#admin tbody").empty();
-        response.users.forEach((user) => {
+        // update button state
+        $("#prev-button").prop("disabled", response.progress <= 0);
+        $("#next-button").prop("disabled", response.progress >= 100);
+        // update user status table
+        let users = Object.keys(response.decisions);
+        users.forEach((user) => {
             let row = $("<tr><th scope='row'>" + user + "</td><td></td><td></td><td></td></tr>");
+            if (response.decisions[user]) {
+                row = $(
+                    "<tr>"
+                     + "<th scope='row'>" + user + "</td>"
+                     + "<td>" + response.decisions[user].task + "</td>"
+                     + "<td>" + (
+                        response.decisions[user].design ?
+                        response.decisions[user].design : ""
+                     ) + "</td>"
+                     + "<td>" + (
+                        response.decisions[user].strategy ?
+                        (
+                            response.decisions[user].strategy=="collaborative" ? 
+                            "<span class='text-success'><i class='bi-c-circle-fill'></i> collaborative</span>" : 
+                            "<span class='text-danger'><i class='bi-info-circle-fill'></i> individual</span>"
+                        ) : ""
+                    ) + "</td>"
+                     + "</tr>"
+                );
+            }
             $("#admin tbody").append(row);
         });
     });
