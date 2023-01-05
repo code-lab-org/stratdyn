@@ -1,0 +1,147 @@
+[
+    {
+        "label": "Task 1",
+        "options": [
+            {
+                "label": "Design A",
+                "image": "alaska_oscar",
+                "upside": 120,
+                "downside": -230
+            },
+            {
+                "label": "Design B",
+                "image": "carpet_magazine",
+                "upside": 85,
+                "downside": -90
+            },
+            {
+                "label": "Design C",
+                "image": "diet_south",
+                "upside": 72,
+                "downside": -38
+            },
+            {
+                "label": "Design Y",
+                "image": "echo_steak",
+                "upside": 50,
+                "downside": 50
+            }
+        ]
+    },
+    {
+        "label": "Task 2",
+        "options": [
+            {
+                "label": "Design A",
+                "image": "alaska_oscar",
+                "upside": 120,
+                "downside": -230
+            },
+            {
+                "label": "Design B",
+                "image": "carpet_magazine",
+                "upside": 85,
+                "downside": -90
+            },
+            {
+                "label": "Design C",
+                "image": "diet_south",
+                "upside": 72,
+                "downside": -38
+            },
+            {
+                "label": "Design Y",
+                "image": "echo_steak",
+                "upside": 50,
+                "downside": 50
+            }
+        ]
+    },
+    {
+        "label": "Task 3",
+        "options": [
+            {
+                "label": "Design A",
+                "image": "alaska_oscar",
+                "upside": 120,
+                "downside": -230
+            },
+            {
+                "label": "Design B",
+                "image": "carpet_magazine",
+                "upside": 85,
+                "downside": -90
+            },
+            {
+                "label": "Design C",
+                "image": "diet_south",
+                "upside": 72,
+                "downside": -38
+            },
+            {
+                "label": "Design Y",
+                "image": "echo_steak",
+                "upside": 50,
+                "downside": 50
+            }
+        ]
+    },
+    {
+        "label": "Task 4",
+        "options": [
+            {
+                "label": "Design A",
+                "image": "alaska_oscar",
+                "upside": 120,
+                "downside": -230
+            },
+            {
+                "label": "Design B",
+                "image": "carpet_magazine",
+                "upside": 85,
+                "downside": -90
+            },
+            {
+                "label": "Design C",
+                "image": "diet_south",
+                "upside": 72,
+                "downside": -38
+            },
+            {
+                "label": "Design Y",
+                "image": "echo_steak",
+                "upside": 50,
+                "downside": 50
+            }
+        ]
+    },
+    {
+        "label": "Task 5",
+        "options": [
+            {
+                "label": "Design A",
+                "image": "alaska_oscar",
+                "upside": 120,
+                "downside": -230
+            },
+            {
+                "label": "Design B",
+                "image": "carpet_magazine",
+                "upside": 85,
+                "downside": -90
+            },
+            {
+                "label": "Design C",
+                "image": "diet_south",
+                "upside": 72,
+                "downside": -38
+            },
+            {
+                "label": "Design Y",
+                "image": "echo_steak",
+                "upside": 50,
+                "downside": 50
+            }
+        ]
+    }
+ ]

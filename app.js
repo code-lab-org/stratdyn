@@ -5,18 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
-const http = require('http');
-const server = http.createServer(app);
-const { Server } = require("socket.io");
-const io = new Server(server);
-
-io.on('connection', (socket) => {
-  console.log("user connected");
-  socket.on('disconnect', () => {
-    console.log('user disconnected');
-  });
-});
+require('./stratdyn')(io);
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -39,4 +31,4 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
 });
 
-module.exports = app;
+module.exports = {app: app, server: server};
