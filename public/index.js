@@ -140,8 +140,8 @@ $(document).ready(function() {
                 "<tr><th scope='row'>" 
                 + (
                     response.decisions[user].online ? 
-                    "<i class='bi-person-fill-check text-success'></i> " :
-                    "<i class='bi-person-slash text-danger'></i> "
+                    "<i class='bi-person-fill-check text-success me-1'></i>" :
+                    "<i class='bi-person-slash text-danger me-1'></i>"
                 ) + user
                 + "</th>"
             );
