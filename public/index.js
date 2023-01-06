@@ -136,12 +136,18 @@ $(document).ready(function() {
         // update user status table
         let users = Object.keys(response.decisions);
         users.forEach((user) => {
-            let row = $("<tr><th scope='row'>" + user + "</td><td></td><td></td><td></td></tr>");
+            let row = (
+                "<tr><th scope='row'>" 
+                + (
+                    response.decisions[user].online ? 
+                    "<i class='bi-person-fill-check text-success'></i> " :
+                    "<i class='bi-person-slash text-danger'></i> "
+                ) + user
+                + "</th>"
+            );
             if (response.decisions[user]) {
-                row = $(
-                    "<tr>"
-                     + "<th scope='row'>" + user + "</td>"
-                     + "<td>" + response.decisions[user].task + "</td>"
+                row += (
+                     "<td>" + response.decisions[user].task + "</td>"
                      + "<td>" + (
                         response.decisions[user].design ?
                         response.decisions[user].design : ""
@@ -154,10 +160,12 @@ $(document).ready(function() {
                             "<span class='text-danger'><i class='bi-info-circle-fill'></i> individual</span>"
                         ) : ""
                     ) + "</td>"
-                     + "</tr>"
                 );
+            } else {
+                row += "<td></td><td></td><td></td>";
             }
-            $("#admin tbody").append(row);
+            row += "</tr>"
+            $("#admin tbody").append($(row));
         });
     });
 

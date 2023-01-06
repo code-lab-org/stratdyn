@@ -64,6 +64,7 @@ module.exports = function(io) {
             Object.keys(experiment.decisions).forEach((user) => {
                 if (currentTaskIndex >= 0 && currentTaskIndex < experiment.tasks.length) {
                     decisions[user] = {
+                        "online": user in users,
                         "task": experiment.tasks[experiment.assignments[user][currentTaskIndex]].label,
                         "design": experiment.decisions[user][currentTaskIndex].design,
                         "strategy": experiment.decisions[user][currentTaskIndex].strategy
