@@ -1,7 +1,7 @@
 {
     "tasks": [
         {
-            "label": "Task 1",
+            "label": "Task Alaska",
             "options": [
                 {"label": "Design K", "image": "neptune_pip", "upside": 130, "downside": -270}, 
                 {"label": "Design L", "image": "monkey_hawaii", "upside": 105, "downside": -170}, 
@@ -10,7 +10,7 @@
             ]
         },
         {
-            "label": "Task 2",
+            "label": "Task California",
             "options": [
                 {"label": "Design K", "image": "stream_lactose", "upside": 122, "downside": -240}, 
                 {"label": "Design L", "image": "tennis_bakerloo", "upside": 107, "downside": -180}, 
@@ -19,7 +19,7 @@
             ]
         },
         {
-            "label": "Task 3",
+            "label": "Task Florida",
             "options": [
                 {"label": "Design K", "image": "echo_steak", "upside": 85, "downside": 0}, 
                 {"label": "Design L", "image": "seven_hot", "upside": 65, "downside": 10}, 
@@ -29,7 +29,7 @@
             ]
         },
         {
-            "label": "Task 4",
+            "label": "Task Kentucky",
             "options": [
                 {"label": "Design K", "image": "two_zebra", "upside": 88, "downside": -102}, 
                 {"label": "Design L", "image": "tennis_bakerloo", "upside": 100, "downside": -150}, 
@@ -39,7 +39,7 @@
             ]
         },
         {
-            "label": "Task 5",
+            "label": "Task Michigan",
             "options": [
                 {"label": "Design K", "image": "pluto_delaware", "upside": 95, "downside": -130}, 
                 {"label": "Design L", "image": "neptune_pip", "upside": 106, "downside": -175}, 
@@ -49,7 +49,7 @@
             ]
         },
         {
-            "label": "Task 6",
+            "label": "Task Minnesota",
             "options": [
                 {"label": "Design K", "image": "two_zebra", "upside": 72, "downside": -40}, 
                 {"label": "Design L", "image": "stream_lactose", "upside": 100, "downside": -150}, 
@@ -59,7 +59,7 @@
             ]
         },
         {
-            "label": "Task 7",
+            "label": "Task Montana",
             "options": [
                 {"label": "Design K", "image": "item_fanta", "upside": 50, "downside": 5}, 
                 {"label": "Design L", "image": "monkey_hawaii", "upside": 60, "downside": 0}, 
@@ -68,7 +68,7 @@
             ]
         },
         {
-            "label": "Task 8",
+            "label": "Task Nevada",
             "options": [
                 {"label": "Design K", "image": "six_cardinal", "upside": 130, "downside": -140}, 
                 {"label": "Design L", "image": "robert_utah", "upside": 105, "downside": -80}, 
@@ -77,7 +77,7 @@
             ]
         },
         {
-            "label": "Task 9",
+            "label": "Task New Jersey",
             "options": [
                 {"label": "Design K", "image": "seven_hot", "upside": 107, "downside": -85}, 
                 {"label": "Design L", "image": "six_cardinal", "upside": 122, "downside": -120}, 
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "label": "Task 10",
+            "label": "Task North Carolina",
             "options": [
                 {"label": "Design K", "image": "robert_utah", "upside": 88, "downside": -40}, 
                 {"label": "Design L", "image": "seven_hot", "upside": 100, "downside": -67}, 
@@ -95,7 +95,7 @@
             ]
         },
         {
-            "label": "Task 11",
+            "label": "Task New York",
             "options": [
                 {"label": "Design K", "image": "johnny_october", "upside": 82, "downside": -25}, 
                 {"label": "Design L", "image": "johnny_washington", "upside": 106, "downside": -85}, 
@@ -104,7 +104,7 @@
             ]
         },
         {
-            "label": "Task 12",
+            "label": "Task Texas",
             "options": [
                 {"label": "Design K", "image": "johnny_washington", "upside": 100, "downside": -68}, 
                 {"label": "Design L", "image": "johnny_october", "upside": 72, "downside": -2}, 
@@ -113,7 +113,7 @@
             ]
         },
         {
-            "label": "Task 13",
+            "label": "Task Utah",
             "options": [
                 {"label": "Design K", "image": "sweet_cardinal", "upside": 70, "downside": 10}, 
                 {"label": "Design L", "image": "mike_social", "upside": 80, "downside": 5}, 
@@ -122,7 +122,7 @@
             ]
         },
         {
-            "label": "Task 14",
+            "label": "Task Virginia",
             "options": [
                 {"label": "Design K", "image": "stream_early", "upside": 115, "downside": -48}, 
                 {"label": "Design L", "image": "echo_steak", "upside": 130, "downside": -70}, 
@@ -131,7 +131,7 @@
             ]
         },
         {
-            "label": "Task 15",
+            "label": "Task Washington",
             "options": [
                 {"label": "Design K", "image": "friend_michigan", "upside": 96, "downside": -20}, 
                 {"label": "Design L", "image": "floor_lima", "upside": 107, "downside": -36}, 
@@ -140,7 +140,7 @@
             ]
         },
         {
-            "label": "Task 16",
+            "label": "Task Wisconsin",
             "options": [
                 {"label": "Design K", "image": "echo_steak", "upside": 114, "downside": -46}, 
                 {"label": "Design L", "image": "edward_beer", "upside": 88, "downside": -8}, 
@@ -149,7 +149,7 @@
             ]
         },
         {
-            "label": "Task 17",
+            "label": "Task Oklahoma",
             "options": [
                 {"label": "Design K", "image": "floor_lima", "upside": 95, "downside": -18}, 
                 {"label": "Design L", "image": "friend_michigan", "upside": 82, "downside": 2}, 
@@ -158,7 +158,7 @@
             ]
         },
         {
-            "label": "Task 18",
+            "label": "Task Massachusetts",
             "options": [
                 {"label": "Design K", "image": "edward_beer", "upside": 45, "downside": 10}, 
                 {"label": "Design L", "image": "johnny_october", "upside": 65, "downside": 0}, 
@@ -167,7 +167,7 @@
             ]
         },
         {
-            "label": "Task 19",
+            "label": "Task Hawaii",
             "options": [
                 {"label": "Design K", "image": "floor_lima", "upside": 88, "downside": -7}, 
                 {"label": "Design L", "image": "item_fanta", "upside": 100, "downside": -25}, 
@@ -176,7 +176,7 @@
             ]
         },
         {
-            "label": "Task 20",
+            "label": "Task Alaska",
             "options": [
                 {"label": "Design K", "image": "carpet_magazine", "upside": 105, "downside": -116}, 
                 {"label": "Design L", "image": "alaska_oscar", "upside": 115, "downside": -145}, 
@@ -185,7 +185,7 @@
             ]
         }, 
         {
-            "label": "Task 21",
+            "label": "Task Kansas",
             "options": [
                 {"label": "Design K", "image": "alaska_oscar", "upside": 107, "downside": -122}, 
                 {"label": "Design L", "image": "ohio_colorado", "upside": 122, "downside": -170}, 
@@ -194,7 +194,7 @@
             ]
         },
         {
-            "label": "Task 22",
+            "label": "Task Arizona",
             "options": [
                 {"label": "Design K", "image": "ohio_colorado", "upside": 114, "downside": -142}, 
                 {"label": "Design L", "image": "mike_social", "upside": 100, "downside": -100}, 
@@ -203,7 +203,7 @@
             ]
         },
         {
-            "label": "Task 23",
+            "label": "Task Mississippi",
             "options": [
                 {"label": "Design K", "image": "alaska_oscar", "upside": 55, "downside": 0}, 
                 {"label": "Design L", "image": "floor_california", "upside": 35, "downside": 10}, 
@@ -212,7 +212,7 @@
             ]
         },
         {
-            "label": "Task 24",
+            "label": "Task Tennessee",
             "options": [
                 {"label": "Design K", "image": "diet_south", "upside": 106, "downside": -118}, 
                 {"label": "Design L", "image": "carpet_magazine", "upside": 82, "downside": -46}, 
@@ -221,7 +221,7 @@
             ]
         },
         {
-            "label": "Task alpha",
+            "label": "Task Illinois",
             "options": [
                 {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
                 {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
