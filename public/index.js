@@ -114,15 +114,48 @@ $(document).ready(function() {
     // bind behavior to the socket.io show welcome screen
     socket.on("show-welcome-screen", (response) => {
         // hide the wait, design and thank you screens
-        $("#admin, #wait, #design, #thank-you").collapse("hide");
+        $("#admin, #wait, #design, #thank-you, #main-survey").collapse("hide");
         // show the welcome screen
         $("#welcome").collapse("show");
     });
 
+    // bind behavior to the socket.io show survey screen
+    socket.on("show-survey-screen", (response) => {
+        // hide the wait, design and thank you screens
+        $("#admin, #wait, #design, #thank-you, #welcome").collapse("hide");
+        $("#survey-form input").prop("disabled", false);
+        $("#survey-form button:submit").prop("disabled", false);
+        $("#survey-form button:submit .spinner-border").addClass("d-none");
+        // show the welcome screen
+        $("#main-survey").collapse("show");
+    });
+
+    // bind behavior to survey form submissions
+    $("#survey-form").on("submit", (event) => {
+        // send a socket.io survey submit with the responses
+        socket.emit("submit-survey", {
+            "q1t2": parseInt($("#survey-q1t2").val()),
+            "q2r3": parseInt($("#survey-q2r3").val()),
+            "q3c1": parseInt($("#survey-q3c1").val()),
+            "q4r2": parseInt($("#survey-q4r2").val()),
+            "q5t1": parseInt($("#survey-q5t1").val()),
+            "q6r1": parseInt($("#survey-q6r1").val()),
+            "q7c3": parseInt($("#survey-q7c3").val()),
+            "q8t3": parseInt($("#survey-q8t3").val()),
+            "q9c2": parseInt($("#survey-q9c2").val())
+        });
+        $("#survey-form input").prop("disabled", true);
+        $("#survey-form button:submit").prop("disabled", true);
+        $("#survey-form button:submit .spinner-border").removeClass("d-none");
+        // bypass the default form submission process
+        event.preventDefault();
+    });
+    
+
     // bind behavior to the socket.io show admin screen
     socket.on("show-admin-screen", (response) => {
         // hide the wait, design and thank you screens
-        $("#welcome, #wait, #design, #thank-you").collapse("hide");
+        $("#welcome, #wait, #design, #thank-you, #main-survey").collapse("hide");
         // show the admin screen
         $("#admin").collapse("show");
         // set the progress bar to the correct value
@@ -172,7 +205,7 @@ $(document).ready(function() {
     // bind behavior to the socket.io show wait screen
     socket.on("show-wait-screen", (response) => {
         // hide the welcome, admin, design, and thank you screens
-        $("#welcome, #admin, #design, #thank-you").collapse("hide");
+        $("#welcome, #admin, #design, #thank-you, #main-survey").collapse("hide");
         // show the wait screen
         $("#wait").collapse("show");
     });
@@ -185,7 +218,7 @@ $(document).ready(function() {
     // bind behavior to the socket.io show design task
     socket.on("show-design-task", (response) => {
         // hide the welcome, admin, wait, and thank-you screens
-        $("#welcome, #admin, #wait, #thank-you").collapse("hide");
+        $("#welcome, #admin, #wait, #thank-you, #main-survey").collapse("hide");
         // show the design interface
         $("#design").collapse("show");
         // hide spinner on button and update text
@@ -219,7 +252,7 @@ $(document).ready(function() {
     // bind behavior to the socket.io show thank you screen
     socket.on("show-thank-you-screen", (response) => {
         // hide the admin, wait, design and welcome screens
-        $("#admin, #wait, #design, #welcome").collapse("hide");
+        $("#admin, #wait, #design, #welcome, #main-survey").collapse("hide");
         // show the welcome screen
         $("#thank-you").collapse("show");
     });

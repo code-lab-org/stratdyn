@@ -24,7 +24,7 @@ module.exports = function(io) {
         );
     });
 
-    let currentTaskIndex = -1;
+    let currentTaskIndex = -2;
 
     // keep track of logged-in users and admins
     const users = {};
@@ -47,6 +47,11 @@ module.exports = function(io) {
         function showWelcomeScreen(context) {
             // send a socket.io show welcome screen
             context.emit('show-welcome-screen');
+        }
+
+        function showSurveyScreen(context) {
+            // send a socket.io show survey screen
+            context.emit('show-survey-screen');
         }
 
         function showWaitScreen(context) {
@@ -75,7 +80,7 @@ module.exports = function(io) {
             });
             // send a socket.io show admin screen
             context.emit('show-admin-screen', {
-                "progress": progress = Math.round(100*(currentTaskIndex+1)/(experiment.tasks.length+1)),
+                "progress": progress = Math.round(100*(currentTaskIndex+2)/(experiment.tasks.length+2)),
                 "decisions": decisions
             });
         }
@@ -87,9 +92,12 @@ module.exports = function(io) {
             } else if (username in admins) {
                 // if admin logged in, show admin screen
                 showAdminScreen(context);
-            } else if (currentTaskIndex < 0) {
+            } else if (currentTaskIndex < -1) {
                 // if not ready to start, show wait screen
                 showWaitScreen(context);
+            } else if (currentTaskIndex < 0) {
+                // if not ready to start, show survey screen
+                showSurveyScreen(context);
             } else if (currentTaskIndex < experiment.tasks.length) {
                 // if incomplete, show next design task
                 showDesignTask(context);
@@ -154,6 +162,12 @@ module.exports = function(io) {
             }
         });
 
+        socket.on('submit-survey', (request) => {
+            if (username != null) {
+                console.log(request)
+            }
+        });
+
         // bind behavior to a socket.io logout request
         socket.on('logout-request', () => {
             if (username in users) {
@@ -177,7 +191,7 @@ module.exports = function(io) {
 
         // bind behavior to a socket.io return prev task
         socket.on('return-prev', () => {
-            if (username in admins && currentTaskIndex >= 0) {
+            if (username in admins && currentTaskIndex >= -1) {
                 // increment the current task index
                 currentTaskIndex -= 1;
                 // request all clients to update content

@@ -3,151 +3,235 @@
         {
             "label": "Task 1",
             "options": [
-                {
-                    "label": "Design A",
-                    "image": "alaska_oscar",
-                    "upside": 120,
-                    "downside": -230
-                },
-                {
-                    "label": "Design B",
-                    "image": "carpet_magazine",
-                    "upside": 85,
-                    "downside": -90
-                },
-                {
-                    "label": "Design C",
-                    "image": "diet_south",
-                    "upside": 72,
-                    "downside": -38
-                },
-                {
-                    "label": "Design Y",
-                    "image": "echo_steak",
-                    "upside": 50,
-                    "downside": 50
-                }
+                {"label": "Design K", "image": "neptune_pip", "upside": 130, "downside": -270}, 
+                {"label": "Design L", "image": "monkey_hawaii", "upside": 105, "downside": -170}, 
+                {"label": "Design M", "image":  "pluto_delaware", "upside": 115, "downside": -210}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
             ]
         },
         {
             "label": "Task 2",
             "options": [
-                {
-                    "label": "Design A",
-                    "image": "alaska_oscar",
-                    "upside": 120,
-                    "downside": -230
-                },
-                {
-                    "label": "Design B",
-                    "image": "carpet_magazine",
-                    "upside": 85,
-                    "downside": -90
-                },
-                {
-                    "label": "Design C",
-                    "image": "diet_south",
-                    "upside": 72,
-                    "downside": -38
-                },
-                {
-                    "label": "Design Y",
-                    "image": "echo_steak",
-                    "upside": 50,
-                    "downside": 50
-                }
+                {"label": "Design K", "image": "stream_lactose", "upside": 122, "downside": -240}, 
+                {"label": "Design L", "image": "tennis_bakerloo", "upside": 107, "downside": -180}, 
+                {"label": "Design M", "image":  "two_zebra", "upside": 96, "downside": -136}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
             ]
         },
         {
             "label": "Task 3",
             "options": [
-                {
-                    "label": "Design A",
-                    "image": "alaska_oscar",
-                    "upside": 120,
-                    "downside": -230
-                },
-                {
-                    "label": "Design B",
-                    "image": "carpet_magazine",
-                    "upside": 85,
-                    "downside": -90
-                },
-                {
-                    "label": "Design C",
-                    "image": "diet_south",
-                    "upside": 72,
-                    "downside": -38
-                },
-                {
-                    "label": "Design Y",
-                    "image": "echo_steak",
-                    "upside": 50,
-                    "downside": 50
-                }
+                {"label": "Design K", "image": "echo_steak", "upside": 85, "downside": 0}, 
+                {"label": "Design L", "image": "seven_hot", "upside": 65, "downside": 10}, 
+                {"label": "Design M", "image":  "ohio_colorado", "upside": 75, "downside": 5}, 
+                {"label": "Design Y", "image": "diet_south", "upside": 100, "downside": 20}
+
             ]
         },
         {
             "label": "Task 4",
             "options": [
-                {
-                    "label": "Design A",
-                    "image": "alaska_oscar",
-                    "upside": 120,
-                    "downside": -230
-                },
-                {
-                    "label": "Design B",
-                    "image": "carpet_magazine",
-                    "upside": 85,
-                    "downside": -90
-                },
-                {
-                    "label": "Design C",
-                    "image": "diet_south",
-                    "upside": 72,
-                    "downside": -38
-                },
-                {
-                    "label": "Design Y",
-                    "image": "echo_steak",
-                    "upside": 50,
-                    "downside": 50
-                }
+                {"label": "Design K", "image": "two_zebra", "upside": 88, "downside": -102}, 
+                {"label": "Design L", "image": "tennis_bakerloo", "upside": 100, "downside": -150}, 
+                {"label": "Design M", "image":  "stream_lactose", "upside": 114, "downside": -210}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+
             ]
         },
         {
             "label": "Task 5",
             "options": [
-                {
-                    "label": "Design A",
-                    "image": "alaska_oscar",
-                    "upside": 120,
-                    "downside": -230
-                },
-                {
-                    "label": "Design B",
-                    "image": "carpet_magazine",
-                    "upside": 85,
-                    "downside": -90
-                },
-                {
-                    "label": "Design C",
-                    "image": "diet_south",
-                    "upside": 72,
-                    "downside": -38
-                },
-                {
-                    "label": "Design Y",
-                    "image": "echo_steak",
-                    "upside": 50,
-                    "downside": 50
-                }
+                {"label": "Design K", "image": "pluto_delaware", "upside": 95, "downside": -130}, 
+                {"label": "Design L", "image": "neptune_pip", "upside": 106, "downside": -175}, 
+                {"label": "Design M", "image":  "monkey_hawaii", "upside": 82, "downside": -80}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+
+            ]
+        },
+        {
+            "label": "Task 6",
+            "options": [
+                {"label": "Design K", "image": "two_zebra", "upside": 72, "downside": -40}, 
+                {"label": "Design L", "image": "stream_lactose", "upside": 100, "downside": -150}, 
+                {"label": "Design M", "image":  "tennis_bakerloo", "upside": 88, "downside": -105}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+
+            ]
+        },
+        {
+            "label": "Task 7",
+            "options": [
+                {"label": "Design K", "image": "item_fanta", "upside": 50, "downside": 5}, 
+                {"label": "Design L", "image": "monkey_hawaii", "upside": 60, "downside": 0}, 
+                {"label": "Design M", "image":  "friend_michigan", "upside": 40, "downside": 10}, 
+                {"label": "Design Y", "image": "pluto_delaware", "upside": 75, "downside": 15}
+            ]
+        },
+        {
+            "label": "Task 8",
+            "options": [
+                {"label": "Design K", "image": "six_cardinal", "upside": 130, "downside": -140}, 
+                {"label": "Design L", "image": "robert_utah", "upside": 105, "downside": -80}, 
+                {"label": "Design M", "image":  "seven_hot", "upside": 115, "downside": -105}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 9",
+            "options": [
+                {"label": "Design K", "image": "seven_hot", "upside": 107, "downside": -85}, 
+                {"label": "Design L", "image": "six_cardinal", "upside": 122, "downside": -120}, 
+                {"label": "Design M", "image":  "robert_utah", "upside": 96, "downside": -59}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 10",
+            "options": [
+                {"label": "Design K", "image": "robert_utah", "upside": 88, "downside": -40}, 
+                {"label": "Design L", "image": "seven_hot", "upside": 100, "downside": -67}, 
+                {"label": "Design M", "image":  "six_cardinal", "upside": 114, "downside": -100}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 11",
+            "options": [
+                {"label": "Design K", "image": "johnny_october", "upside": 82, "downside": -25}, 
+                {"label": "Design L", "image": "johnny_washington", "upside": 106, "downside": -85}, 
+                {"label": "Design M", "image":  "london_fanta", "upside": 95, "downside": -55}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 12",
+            "options": [
+                {"label": "Design K", "image": "johnny_washington", "upside": 100, "downside": -68}, 
+                {"label": "Design L", "image": "johnny_october", "upside": 72, "downside": -2}, 
+                {"label": "Design M", "image":  "london_fanta", "upside": 88, "downside": -40}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 13",
+            "options": [
+                {"label": "Design K", "image": "sweet_cardinal", "upside": 70, "downside": 10}, 
+                {"label": "Design L", "image": "mike_social", "upside": 80, "downside": 5}, 
+                {"label": "Design M", "image":  "london_sweet", "upside": 60, "downside": 20}, 
+                {"label": "Design Y", "image": "stream_lactose", "upside": 90, "downside": 0}
+            ]
+        },
+        {
+            "label": "Task 14",
+            "options": [
+                {"label": "Design K", "image": "stream_early", "upside": 115, "downside": -48}, 
+                {"label": "Design L", "image": "echo_steak", "upside": 130, "downside": -70}, 
+                {"label": "Design M", "image":  "edward_beer", "upside": 105, "downside": -33}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 15",
+            "options": [
+                {"label": "Design K", "image": "friend_michigan", "upside": 96, "downside": -20}, 
+                {"label": "Design L", "image": "floor_lima", "upside": 107, "downside": -36}, 
+                {"label": "Design M", "image":  "item_fanta", "upside": 122, "downside": -60}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 16",
+            "options": [
+                {"label": "Design K", "image": "echo_steak", "upside": 114, "downside": -46}, 
+                {"label": "Design L", "image": "edward_beer", "upside": 88, "downside": -8}, 
+                {"label": "Design M", "image":  "stream_early", "upside": 100, "downside": -25}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 17",
+            "options": [
+                {"label": "Design K", "image": "floor_lima", "upside": 95, "downside": -18}, 
+                {"label": "Design L", "image": "friend_michigan", "upside": 82, "downside": 2}, 
+                {"label": "Design M", "image":  "item_fanta", "upside": 106, "downside": -35}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 18",
+            "options": [
+                {"label": "Design K", "image": "edward_beer", "upside": 45, "downside": 10}, 
+                {"label": "Design L", "image": "johnny_october", "upside": 65, "downside": 0}, 
+                {"label": "Design M", "image":  "carpet_magazine", "upside": 55, "downside": 5}, 
+                {"label": "Design Y", "image": "mike_social", "upside": 80, "downside": 16}
+            ]
+        },
+        {
+            "label": "Task 19",
+            "options": [
+                {"label": "Design K", "image": "floor_lima", "upside": 88, "downside": -7}, 
+                {"label": "Design L", "image": "item_fanta", "upside": 100, "downside": -25}, 
+                {"label": "Design M", "image":  "friend_michigan", "upside": 72, "downside": 17}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 20",
+            "options": [
+                {"label": "Design K", "image": "carpet_magazine", "upside": 105, "downside": -116}, 
+                {"label": "Design L", "image": "alaska_oscar", "upside": 115, "downside": -145}, 
+                {"label": "Design M", "image":  "diet_south", "upside": 130, "downside": -190}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        }, 
+        {
+            "label": "Task 21",
+            "options": [
+                {"label": "Design K", "image": "alaska_oscar", "upside": 107, "downside": -122}, 
+                {"label": "Design L", "image": "ohio_colorado", "upside": 122, "downside": -170}, 
+                {"label": "Design M", "image":  "carpet_magazine", "upside": 96, "downside": -90}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 22",
+            "options": [
+                {"label": "Design K", "image": "ohio_colorado", "upside": 114, "downside": -142}, 
+                {"label": "Design L", "image": "mike_social", "upside": 100, "downside": -100}, 
+                {"label": "Design M", "image":  "london_sweet", "upside": 88, "downside": -65}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task 23",
+            "options": [
+                {"label": "Design K", "image": "alaska_oscar", "upside": 55, "downside": 0}, 
+                {"label": "Design L", "image": "floor_california", "upside": 35, "downside": 10}, 
+                {"label": "Design M", "image":  "two_zebra", "upside": 45, "downside": 5}, 
+                {"label": "Design Y", "image": "tennis_bakerloo", "upside": 70, "downside": 14}
+            ]
+        },
+        {
+            "label": "Task 24",
+            "options": [
+                {"label": "Design K", "image": "diet_south", "upside": 106, "downside": -118}, 
+                {"label": "Design L", "image": "carpet_magazine", "upside": 82, "downside": -46}, 
+                {"label": "Design M", "image":  "alaska_oscar", "upside": 95, "downside": -85}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+            ]
+        },
+        {
+            "label": "Task alpha",
+            "options": [
+                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
+                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
+                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
+                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
             ]
         }
     ],
     "assignments": {
-        "user001": [0, 1, 2, 3, 4],
-        "user002": [4, 3, 2, 1, 0]
+        "user001": [15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user002": [11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3]
     }
 }
