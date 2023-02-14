@@ -159,12 +159,27 @@ module.exports = function(io) {
                 Object.keys(admins).forEach(admin => {
                     showAdminScreen(admins[admin]);
                 });
+                // TODO change to log file
+                console.log(
+                    username + "\t"
+                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
+                    + request.design + "\t"
+                    + request.strategy + "\t"
+                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].options[request.design].upside + "\t"
+                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].options[request.design].downside + "\t"
+                )
             }
         });
 
         socket.on('submit-survey', (request) => {
             if (username != null) {
                 console.log(request)
+                // TODO change to log file
+                console.log(
+                    username + "\t" 
+                    + request["q1t2"] + "\t" 
+                    + request["q2r3"]
+                );
             }
         });
 
