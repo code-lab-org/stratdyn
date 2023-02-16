@@ -156,6 +156,11 @@ module.exports = function(io) {
                     "design": request.design,
                     "strategy": request.strategy,
                 }
+                console.log({
+                    "user": username,
+                    "design": request.design,
+                    "strategy": request.strategy,
+                });
                 // notify admins of new decision
                 Object.keys(admins).forEach(admin => {
                     showAdminScreen(admins[admin]);
@@ -172,6 +177,10 @@ module.exports = function(io) {
 
         socket.on('submit-survey', (request) => {
             if (username != null) {
+                console.log({
+                    "user": username,
+                    "results": request
+                });
                 console.log(request)
                 // TODO change to log file
                 console.log(
