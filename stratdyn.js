@@ -1,5 +1,6 @@
 module.exports = function(io) {
     const fs = require('fs');
+    var _ = require('lodash');
 
     // read the admin credentials from file
     const adminCredentials = JSON.parse(
@@ -165,8 +166,6 @@ module.exports = function(io) {
                     + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
                     + request.design + "\t"
                     + request.strategy + "\t"
-                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].options[request.design].upside + "\t"
-                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].options[request.design].downside + "\t"
                 )
             }
         });
