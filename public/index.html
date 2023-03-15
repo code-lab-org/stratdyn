@@ -59,6 +59,66 @@
     </div>
   </div>
 
+  <div class="container collapse hide text" id="demographics-survey">
+    <div class="row">
+      <div class="col">
+        <h1>Demographics Survey</h1>
+        <form class=" bg-white px-4" action="" id="demographics-survey-form">
+          <p class="fw-bold">Instructions:</p>
+          <p> Please complete and submit all of the below questions. </p>
+          <p>
+            <strong>1- What is your gender?</strong>
+          </p>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Female</input>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Male</input>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Other</input>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Rather not say</input>
+            <p class="fw-bold">2- How old are you (as of today, in years)?</p>
+            <div class="form-outline mb-4">
+              <input class="form-control" type="text" id="demographics-survey-q2" rows="4"></textarea>
+            </div>
+            <p class="fw-bold">3- How many years of college-level (undergraduate and graduate) education have you completed in a technical field (STEM)?</p>
+            <div class="form-outline mb-4">
+              <input class="form-control" type="text" id="demographics-survey-q3" rows="4"></textarea>
+            </div>
+            <p class="fw-bold">4- How many years of professional experience do you have in a technical field (STEM)?</p>
+            <div class="form-outline mb-4">
+              <input class="form-control" type="text" id="demographics-survey-q4" rows="4"></textarea>
+            </div>
+            <p class="fw-bold">5- What is your native language?</p>
+            <div class="form-outline mb-4">
+              <input class="form-control" type="text" id="demographics-survey-q5" rows="4"></textarea>
+            </div>
+            <p>
+              <strong>6- What is your level of English proficiency?</strong>
+            </p>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Fluent/Native</input>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >High (e.g. TOEFL > 95 or IELTS >7</input>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-High (e.g. TOEFL 85-94 or IELTS 6.5-7)</input>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-Low (e.g. TOEFL 60-84 or IELTS 6)</input>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Low (e.g. TOEFL < 60 or IELTS < 6)</input>
+              <p>
+                <strong>7- How well do you know your selected partner in the experiment? (“1” meaning do not know at all – “5” meaning very closely know)</strong>
+              </p>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(1) the first-time meeting</input>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(2) people you seem, meet few times</input>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(3) people who you meet/see occasionally</input>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(4) friend, people who you meet regularly</input>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(5) relative, partner, very close friend</input>
+          <div class="text-end mt-3">
+            <button type="submit" class="btn btn-primary">          
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+      
+
+ 
+
   <div class="container collapse hide text" id="main-survey">
     <div class="row">
       <div class="col">
@@ -154,6 +214,115 @@
             <label for="customRange3" class="form-label float-end">100</label>
             <div class="range">
               <input type="range" class="form-range" min="0" max="100" step="1" id="survey-q9c2" disabled />
+            </div>
+          </div>
+          <div class="text-end mt-3">
+            <button type="submit" class="btn btn-primary">          
+              <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+              Submit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container collapse hide text" id="main-postsurvey">
+    <div class="row">
+      <div class="col">
+        <h1>Post Survey</h1>
+        <form class=" bg-white px-4" action="" id="postsurvey-form">
+          <p class="fw-bold">Instructions:</p>
+          <p> Please select the best response from the below scale representing your current most accurate state. 0 scale mean "Definitely Disagree" and 100 scale mean "Definitely Agree". </p>
+          <p>
+            <strong>1- I believe I had enough influence over achieving a successful collaboration with my partner.</strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q1c2" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>2- I think choosing collaborative design options put my goal of maximizing my total score in the experiment at risk. </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q2r1" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>3- I did not trust the information my partner provides while making a decision. </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q3t3" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>4- I perceive choosing collaborative design options in the experiment had higher risk than choosing individual design options.  </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q4r2" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>5- I believe that choosing collaborative options during experiment was trustworthy. </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q5t1" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>6- I believe my partner’s decisions determined the score that I will receive from the experiment. </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q6c3" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>7- I trust that I maximized my overall experiment score by choosing individual design option. </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q7t2" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>8- The score I received in the experiment determined by my own decisions and efforts.   </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q8c1" disabled />
+            </div>
+          </div>
+          <p>
+            <strong>9- I think choosing collaboration during the experiment was a takeable risk.  </strong>
+          </p>
+          <div class="mx-0 w-100">
+            <label for="customRange3" class="form-label">0</label>
+            <label for="customRange3" class="form-label float-end">100</label>
+            <div class="range">
+              <input type="range" class="form-range" min="0" max="100" step="1" id="postsurvey-q9r3" disabled />
             </div>
           </div>
           <div class="text-end mt-3">

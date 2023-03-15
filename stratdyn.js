@@ -25,7 +25,7 @@ module.exports = function(io) {
         );
     });
 
-    let currentTaskIndex = -2;
+    let currentTaskIndex = -3;
 
     // keep track of logged-in users and admins
     const users = {};
@@ -50,9 +50,19 @@ module.exports = function(io) {
             context.emit('show-welcome-screen');
         }
 
+        function showDemographicsSurveyScreen(context) {
+            // send a socket.io show demographics survey screen
+            context.emit('show-demographics-survey-screen');
+        }
+
         function showSurveyScreen(context) {
             // send a socket.io show survey screen
             context.emit('show-survey-screen');
+        }
+
+        function showPostSurveyScreen(context) {
+            // send a socket.io show post survey screen
+            context.emit('show-postsurvey-screen');
         }
 
         function showWaitScreen(context) {
@@ -81,7 +91,7 @@ module.exports = function(io) {
             });
             // send a socket.io show admin screen
             context.emit('show-admin-screen', {
-                "progress": progress = Math.round(100*(currentTaskIndex+2)/(experiment.tasks.length+2)),
+                "progress": progress = Math.round(100*(currentTaskIndex+2)/(experiment.tasks.length+3)),
                 "decisions": decisions
             });
         }
@@ -93,15 +103,21 @@ module.exports = function(io) {
             } else if (username in admins) {
                 // if admin logged in, show admin screen
                 showAdminScreen(context);
-            } else if (currentTaskIndex < -1) {
+            } else if (currentTaskIndex < -2) {
                 // if not ready to start, show wait screen
                 showWaitScreen(context);
+            } else if (currentTaskIndex < -1) {
+                // if not ready to start, show demographics survey screen
+                showDemographicsSurveyScreen(context);
             } else if (currentTaskIndex < 0) {
                 // if not ready to start, show survey screen
-                showSurveyScreen(context);
+                showSurveyScreen(context)            
             } else if (currentTaskIndex < experiment.tasks.length) {
                 // if incomplete, show next design task
                 showDesignTask(context);
+            } else if (currentTaskIndex == experiment.tasks.length) {
+                // if complete, show next post survey
+                showPostSurveyScreen(context);
             } else {
                 // if complete, show thank you screen
                 showThankYouScreen(context);
@@ -191,6 +207,16 @@ module.exports = function(io) {
             }
         });
 
+        socket.on('submit-demographics-survey', (request) => {
+            if (username != null) {
+                console.log({
+                    "user": username,
+                    "results": request
+                });
+                console.log(request)
+            }
+        });
+
         // bind behavior to a socket.io logout request
         socket.on('logout-request', () => {
             if (username in users) {
@@ -224,7 +250,7 @@ module.exports = function(io) {
 
         // bind behavior to a socket.io advance next task
         socket.on('advance-next', () => {
-            if (username in admins && currentTaskIndex < experiment.tasks.length) {
+            if (username in admins && currentTaskIndex < experiment.tasks.length+1) {
                 // increment the current task index
                 currentTaskIndex += 1;
                 // request all clients to update content
