@@ -232,66 +232,165 @@
         {
             "label": "Training Task 1",
             "options": [
-                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
-                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
-                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
-                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+                {"label": "Design K", "image": "seven_hot", "upside": "92", "downside": "-45"}, 
+                {"label": "Design L", "image": "robert_utah", "upside": "77", "downside": "-15"}, 
+                {"label": "Design M", "image":  "six_cardinal", "upside": "111", "downside": "-90"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
             ]
         },
         {
             "label": "Training Task 2",
             "options": [
-                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
-                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
-                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
-                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+                {"label": "Design K", "image": "item_fanta", "upside": "95", "downside": "-30"}, 
+                {"label": "Design L", "image": "friend_michigan", "upside": "68", "downside": "18"}, 
+                {"label": "Design M", "image":  "floor_lima", "upside": "86", "downside": "-18"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
             ]
         },
         {
             "label": "Training Task 3",
             "options": [
-                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
-                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
-                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
-                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+                {"label": "Design K", "image": "carpet_magazine", "upside": "57", "downside": "7"}, 
+                {"label": "Design L", "image": "edward_beer", "upside": "68", "downside": "3"}, 
+                {"label": "Design M", "image":  "johnny_october", "upside": "48", "downside": "13"}, 
+                {"label": "Design Y", "image": "mike_social", "upside": "83", "downside": "19"}
             ]
         },
         {
             "label": "Training Task 4",
             "options": [
-                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
-                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
-                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
-                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+                {"label": "Design K", "image": "monkey_hawaii", "upside": "90", "downside": "-120"}, 
+                {"label": "Design L", "image": "pluto_delaware", "upside": "110", "downside": "-190"}, 
+                {"label": "Design M", "image":  "neptune_pip", "upside": "128", "downside": "-260"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
             ]
         },
         {
-            "label": "Training Task 5",
+            "label": "Computer Agent Task-1",
             "options": [
-                {"label": "Design K", "image": "carpet_magazine", "upside": 72, "downside": -16}, 
-                {"label": "Design L", "image": "alaska_oscar", "upside": 88, "downside": -65}, 
-                {"label": "Design M", "image":  "ohio_colorado", "upside": 100, "downside": -68}, 
-                {"label": "Design Y", "image": "floor_california", "upside": 50, "downside": 50}
+                {"label": "Design K", "image": "seven_hot", "upside": "114", "downside": "-100"}, 
+                {"label": "Design L", "image": "robert_utah", "upside": "100", "downside": "-70"}, 
+                {"label": "Design M", "image":  "six_cardinal", "upside": "130", "downside": "-145"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-2",
+            "options": [
+                {"label": "Design K", "image": "johnny_washington", "upside": "106", "downside": "-35"}, 
+                {"label": "Design L", "image": "london_fanta", "upside": "96", "downside": "-20"}, 
+                {"label": "Design M", "image":  "johnny_october", "upside": "72", "downside": "17"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-3",
+            "options": [
+                {"label": "Design K", "image": "ohio_colorado", "upside": "84", "downside": "9"}, 
+                {"label": "Design L", "image": "echo_steak", "upside": "94", "downside": "4"}, 
+                {"label": "Design M", "image":  "seven_hot", "upside": "74", "downside": "14"}, 
+                {"label": "Design Y", "image": "diet_south", "upside": "114", "downside": "34"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-4",
+            "options": [
+                {"label": "Design K", "image": "two_zebra", "upside": "88", "downside": "-102"}, 
+                {"label": "Design L", "image": "tennis_bakerloo", "upside": "100", "downside": "-150"}, 
+                {"label": "Design M", "image":  "stream_lactose", "upside": "115", "downside": "-210"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-5",
+            "options": [
+                {"label": "Design K", "image": "stream_lactose", "upside": "115", "downside": "-100"}, 
+                {"label": "Design L", "image": "two_zebra", "upside": "88", "downside": "-40"}, 
+                {"label": "Design M", "image":  "tennis_bakerloo", "upside": "100", "downside": "-70"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-6",
+            "options": [
+                {"label": "Design K", "image": "floor_california", "upside": "34", "downside": "11"}, 
+                {"label": "Design L", "image": "two_zebra", "upside": "44", "downside": "5"}, 
+                {"label": "Design M", "image":  "alaska_oscar", "upside": "54", "downside": "-1"}, 
+                {"label": "Design Y", "image": "tennis_bakerloo", "upside": "69", "downside": "13"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-7",
+            "options": [
+                {"label": "Design K", "image": "stream_early", "upside": "114", "downside": "-50"}, 
+                {"label": "Design L", "image": "echo_steak", "upside": "130", "downside": "-75"}, 
+                {"label": "Design M", "image":  "edward_beer", "upside": "100", "downside": "-70"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-8",
+            "options": [
+                {"label": "Design K", "image": "monkey_hawaii", "upside": "72", "downside": "-40"}, 
+                {"label": "Design L", "image": "neptune_pip", "upside": "106", "downside": "-175"}, 
+                {"label": "Design M", "image":  "pluto_delaware", "upside": "96", "downside": "-135"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-9",
+            "options": [
+                {"label": "Design K", "image": "stream_early", "upside": "100", "downside": "-25"}, 
+                {"label": "Design L", "image": "edward_beer", "upside": "88", "downside": "-7"}, 
+                {"label": "Design M", "image":  "echo_steak", "upside": "115", "downside": "-48"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-10",
+            "options": [
+                {"label": "Design K", "image": "johnny_october", "upside": "72", "downside": "-2"}, 
+                {"label": "Design L", "image": "london_fanta", "upside": "96", "downside": "-55"}, 
+                {"label": "Design M", "image":  "johnny_washington", "upside": "106", "downside": "-80"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-11",
+            "options": [
+                {"label": "Design K", "image": "mike_social", "upside": "87", "downside": "2"}, 
+                {"label": "Design L", "image": "london_sweet", "upside": "67", "downside": "12"}, 
+                {"label": "Design M", "image":  "sweet_cardinal", "upside": "77", "downside": "7"}, 
+                {"label": "Design Y", "image": "stream_lactose", "upside": "102", "downside": "22"}
+            ]
+        },
+        {
+            "label": "Computer Agent Task-12",
+            "options": [
+                {"label": "Design K", "image": "neptune_pip", "upside": "130", "downside": "-270"}, 
+                {"label": "Design L", "image": "pluto_delaware", "upside": "114", "downside": "-210"}, 
+                {"label": "Design M", "image":  "monkey_hawaii", "upside": "100", "downside": "-150"}, 
+                {"label": "Design Y", "image": "floor_california", "upside": "50", "downside": "50"}
             ]
         }
     ],
     "assignments": {
-        "user001": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user002": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
+        "user001": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user002": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
 
-        "user003": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user004": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
+        "user003": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user004": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
 
-        "user005": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user006": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
+        "user005": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user006": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
 
-        "user007": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user008": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
+        "user007": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user008": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
 
-        "user009": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user0010": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
+        "user009": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user0010": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3],
 
-        "user0011": [25, 26, 27, 28, 29, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
-        "user0012": [25, 26, 27, 28, 29, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3]
+        "user0011": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 15, 11, 2, 7, 16, 21, 6, 24, 5, 8, 10, 3, 12, 14, 13, 9, 19, 17, 1, 20, 0, 18, 22, 23, 4],
+        "user0012": [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 11, 15, 2, 9, 19, 1, 6, 23, 8, 5, 20, 4, 12, 13, 14, 7, 16, 17, 21, 10, 18, 0, 22, 24, 3]
     }
 }
