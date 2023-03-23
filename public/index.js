@@ -23,6 +23,20 @@ $(document).ready(function() {
             // enable the design submission button
             $("#design-button").prop("disabled", false);
             if($(event.currentTarget).data("strategy") == "collaborative") {
+                if(currentDesignTask.showMediator) {
+                    // currentDesignTask.options[$(event.currentTarget).index()].upside
+                    // currentDesignTask.options[$(event.currentTarget).index()].downside
+                    // currentDesignTask.options[3].upside
+                    // currentDesignTask.options[3].downside
+                    let stagUpside = parseInt(currentDesignTask.options[$(event.currentTarget).index()].upside, 10)
+                    let stagDownside = parseInt(currentDesignTask.options[$(event.currentTarget).index()].downside, 10)
+                    let hareUpside = parseInt(currentDesignTask.options[3].upside, 10)
+                    let hareDownside = parseInt(currentDesignTask.options[3].downside, 10)
+                    let normDevLossMath = ((hareUpside - stagDownside)/(hareUpside - stagDownside + stagUpside - hareDownside)*100)
+                    let normDevLoss = normDevLossMath.toFixed(0)
+                    $("#mediator-modal .modal-body p").text("The required minimum probability of collaboration from your partner for you to choose this option= " + " " + "%" + normDevLoss);
+                    $("#mediator-modal").modal("show");
+                }
                 // add the background to the collaborative icon
                 $("#design-collaborative").addClass("bg-warning-subtle");
                 // remove the background from the individual icon
@@ -71,7 +85,7 @@ $(document).ready(function() {
         socket.emit("logout-request");
     });
 
-    // bind behavior to clicks on the logout link
+    // bind behavior to clicks on the design button
     $("#design-button").on("click", () => {
         // show spinner on button and update text
         $("#design .spinner-border").removeClass("d-none");
@@ -85,7 +99,8 @@ $(document).ready(function() {
             "design": $("#design .table-active .design-label").text(),
             "strategy": $("#design .table-active").data("strategy"),
             "upside": parseInt($("#design .table-active .design-upside").text()),
-            "downside": parseInt($("#design .table-active .design-downside").text())
+            "downside": parseInt($("#design .table-active .design-downside").text()),
+            "collabBelief": parseInt($("#collabBelief").val())
         });
     });
 
@@ -277,6 +292,8 @@ $(document).ready(function() {
         socket.emit("content-request");
     });
 
+    var currentDesignTask = null;
+
     // bind behavior to the socket.io show design task
     socket.on("show-design-task", (response) => {
         // hide the welcome, admin, wait, and thank-you screens
@@ -300,6 +317,9 @@ $(document).ready(function() {
 
         // set the task label
         $("#design .task-label").text(response.label);
+
+        // save the current design task
+        currentDesignTask = response;
 
         // update the design attributes for each option
         $("#design tbody tr").each((index, element) => {

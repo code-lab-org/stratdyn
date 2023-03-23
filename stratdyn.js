@@ -27,6 +27,24 @@ module.exports = function(io) {
 
     let currentTaskIndex = -3;
 
+    let showMediator = true;
+
+    let timestamp = Math.floor(new Date().getTime() / 1000);
+
+    let taskLogFile = timestamp + '-task.csv';
+    let preSurveyLogFile = timestamp + '-pre.csv';
+    let postSurveyLogFile = timestamp + '-post.csv';
+
+    fs.writeFile(
+        taskLogFile, 
+        "timestamp" + "," + "username" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "\r\n",
+        err => {
+            if (err) {
+                console.error(err);
+            }
+        }
+    );
+
     // keep track of logged-in users and admins
     const users = {};
     const admins = {};
@@ -39,6 +57,7 @@ module.exports = function(io) {
         function showDesignTask(context) {
             // retrieve the current task
             let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
+            task.showMediator = showMediator;
             // compute the progress percentage
             task.progress = Math.round(100*(currentTaskIndex+1)/(experiment.tasks.length+1));
             // send a socket.io show design task
@@ -171,26 +190,40 @@ module.exports = function(io) {
                 experiment.decisions[username][currentTaskIndex] = {
                     "design": request.design,
                     "strategy": request.strategy,
+                    "collabBelief": request.collabBelief,
                 }
                 console.log({
                     "user": username,
                     "design": request.design,
                     "strategy": request.strategy,
+                    "collabBelief": request.collabBelief,
                 });
                 // notify admins of new decision
                 Object.keys(admins).forEach(admin => {
                     showAdminScreen(admins[admin]);
                 });
+                let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
+                fs.appendFile(
+                    taskLogFile, 
+                    Date.now() + "," + username + "," + task.label + "," + request.design + "," + request.strategy + "," + request.collabBelief + "\r\n",
+                    err => {
+                        if (err) {
+                          console.error(err);
+                        }
+                    }
+                );
                 // TODO change to log file
                 console.log(
                     username + "\t"
                     + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
                     + request.design + "\t"
                     + request.strategy + "\t"
+                    + request.collabBelief + "\t"
                 )
             }
         });
 
+        
         socket.on('submit-survey', (request) => {
             if (username != null) {
                 console.log({

@@ -69,10 +69,10 @@
           <p>
             <strong>1- What is your gender?</strong>
           </p>
-            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Female</input>
-            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Male</input>
-            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Other</input>
-            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Rather not say</input>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Female</input> <p> </p>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Male</input> <p> </p>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Other</input> <p> </p>
+            <input class="form-check-input" type="radio" name="demographics-survey-q1" >Rather not say</input> <p> </p>
             <p class="fw-bold">2- How old are you (as of today, in years)?</p>
             <div class="form-outline mb-4">
               <input class="form-control" type="text" id="demographics-survey-q2" rows="4"></textarea>
@@ -92,19 +92,19 @@
             <p>
               <strong>6- What is your level of English proficiency?</strong>
             </p>
-              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Fluent/Native</input>
-              <input class="form-check-input" type="radio" name="demographics-survey-q6" >High (e.g. TOEFL > 95 or IELTS >7</input>
-              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-High (e.g. TOEFL 85-94 or IELTS 6.5-7)</input>
-              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-Low (e.g. TOEFL 60-84 or IELTS 6)</input>
-              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Low (e.g. TOEFL < 60 or IELTS < 6)</input>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Fluent/Native</input> <p> </p>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >High (e.g. TOEFL > 95 or IELTS >7</input> <p> </p>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-High (e.g. TOEFL 85-94 or IELTS 6.5-7)</input> <p> </p>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Medium-Low (e.g. TOEFL 60-84 or IELTS 6)</input> <p> </p>
+              <input class="form-check-input" type="radio" name="demographics-survey-q6" >Low (e.g. TOEFL < 60 or IELTS < 6)</input> <p> </p>
               <p>
                 <strong>7- How well do you know your selected partner in the experiment? (“1” meaning do not know at all – “5” meaning very closely know)</strong>
               </p>
-                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(1) the first-time meeting</input>
-                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(2) people you seem, meet few times</input>
-                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(3) people who you meet/see occasionally</input>
-                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(4) friend, people who you meet regularly</input>
-                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(5) relative, partner, very close friend</input>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(1) the first-time meeting</input> <p> </p>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(2) people you seem, meet few times</input> <p> </p>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(3) people who you meet/see occasionally</input> <p> </p>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(4) friend, people who you meet regularly</input> <p> </p>
+                <input class="form-check-input" type="radio" name="demographics-survey-q7" >(5) relative, partner, very close friend</input> <p> </p>
           <div class="text-end mt-3">
             <button type="submit" class="btn btn-primary">          
               <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
@@ -377,6 +377,16 @@
         </div>
       </div>
     </div>
+    <p>
+      Your belief of collaboration success ("0" indicates failure %100 and "100" meaning success %100): 
+    </p>
+    <div class="mx-0 w-100">
+      <label for="customRange3" class="form-label">0</label>
+      <label for="customRange3" class="form-label float-end">100</label>
+      <div class="range">
+        <input type="range" class="form-range" min="0" max="100" step="1" id="collabBelief" />
+      </div>
+    </div>
     <div class="row">
       <div class="col">
         <h4 class="task-label"></h4>
@@ -482,6 +492,23 @@
           <button type="submit" class="w-100 btn btn-lg btn-primary">Submit</button>
         </div>
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="mediator-modal" role="dialog" aria-labelledby="mediator-modal-label" aria-hidden="true">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mediator-modal-label" >Mediator Information <img src="robotImage.jpg" class="img-circle" alt="robot" style="width: 150px; height: 150px;"/></h5> 
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"><p></p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+      </div>
     </div>
   </div>
 </div>
