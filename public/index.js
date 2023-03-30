@@ -4,7 +4,10 @@ $(document).ready(function() {
 
     // bind behavior to clicks on table row (tr) elements contained within the design table body
     $("#design tbody").on("click", "tr", (event) => {
-        if (!$("#design .spinner-border").hasClass("d-none")) {
+        if (
+            !$("#design .spinner-border").hasClass("d-none") 
+            || !$("#collabBelief").prop("disabled")
+        ) {
             // do not make changes if waiting
             return;
         }
@@ -23,20 +26,6 @@ $(document).ready(function() {
             // enable the design submission button
             $("#design-button").prop("disabled", false);
             if($(event.currentTarget).data("strategy") == "collaborative") {
-                if(currentDesignTask.showMediator) {
-                    // currentDesignTask.options[$(event.currentTarget).index()].upside
-                    // currentDesignTask.options[$(event.currentTarget).index()].downside
-                    // currentDesignTask.options[3].upside
-                    // currentDesignTask.options[3].downside
-                    let stagUpside = parseInt(currentDesignTask.options[$(event.currentTarget).index()].upside, 10)
-                    let stagDownside = parseInt(currentDesignTask.options[$(event.currentTarget).index()].downside, 10)
-                    let hareUpside = parseInt(currentDesignTask.options[3].upside, 10)
-                    let hareDownside = parseInt(currentDesignTask.options[3].downside, 10)
-                    let normDevLossMath = ((hareUpside - stagDownside)/(hareUpside - stagDownside + stagUpside - hareDownside)*100)
-                    let normDevLoss = normDevLossMath.toFixed(0)
-                    $("#mediator-modal .modal-body p").text("The required minimum probability of collaboration from your partner for you to choose this option= " + " " + "%" + normDevLoss);
-                    $("#mediator-modal").modal("show");
-                }
                 // add the background to the collaborative icon
                 $("#design-collaborative").addClass("bg-warning-subtle");
                 // remove the background from the individual icon
@@ -49,6 +38,27 @@ $(document).ready(function() {
             }
         }
     });
+
+    // bind behavior to clicks on robot
+    $("#robot-button").on("click", () => {
+        // currentDesignTask.options[$(event.currentTarget).index()].upside
+        // currentDesignTask.options[$(event.currentTarget).index()].downside
+        // currentDesignTask.options[3].upside
+        // currentDesignTask.options[3].downside
+        let stagUpside = parseInt(currentDesignTask.options[0].upside, 10)
+        let stagDownside = parseInt(currentDesignTask.options[0].downside, 10)
+        let hareUpside = parseInt(currentDesignTask.options[3].upside, 10)
+        let hareDownside = parseInt(currentDesignTask.options[3].downside, 10)
+        let normDevLossMath = ((hareUpside - stagDownside)/(hareUpside - stagDownside + stagUpside - hareDownside)*100)
+        let normDevLoss = normDevLossMath.toFixed(0)
+        $("#robot-modal .modal-body p").html(
+            "Minimum required probability for collaboration= " + " " + "%" + normDevLoss  + "  " + "  " + "   " + 
+            "Your partner's extimated sentiment towards collaboration= " + "%" + partnerCollabBelief
+        );
+        $("#robot-modal").modal("show");
+        console.log(currentDesignTask);
+    });
+
 
     // bind behavior to login form submissions
     $("#login-form").on("submit", (event) => {
@@ -100,8 +110,95 @@ $(document).ready(function() {
             "strategy": $("#design .table-active").data("strategy"),
             "upside": parseInt($("#design .table-active .design-upside").text()),
             "downside": parseInt($("#design .table-active .design-downside").text()),
-            "collabBelief": parseInt($("#collabBelief").val())
         });
+    });
+
+    var currentDesignTask = null;
+
+    // bind behavior to the socket.io show design task
+    socket.on("show-design-task", (response) => {
+        // hide the welcome, admin, wait, and thank-you screens
+        $("#welcome, #admin, #wait, #thank-you, #main-survey, #demographics-survey, #main-postsurvey").collapse("hide");
+        // show the design interface
+        $("#design").collapse("show");
+        // hide spinner on button and update text
+        $("#design .spinner-border").addClass("d-none");
+        $("#design .design-button-label").text("Confirm Decision");
+        // remove active status from any table rows
+        $("#design tbody tr").removeClass("table-active");
+        // remove background from collaborative and individual icons
+        $("#design-collaborative, #design-individual").removeClass("bg-warning-subtle");
+        // enable the design button and enable table hover
+        $("#design-button").prop("disabled", true);
+        $("#design table").addClass("table-hover");
+        // enable slider and button
+        $("#collabBelief-form button:submit").prop("disabled", false);
+        $("#collabBelief").prop("disabled", false);
+        // disable editing and remove table hover
+        $("#design-button").prop("disabled", true);
+        $("#design table").removeClass("table-hover");
+        // disable robot button
+        $("#robot-button").prop("disabled", true);
+        // reset partner collab belief value
+        if(response.showRobot) {
+            $("#robot").removeClass("d-none");
+        } else {
+            $("#robot").addClass("d-none");
+        }
+        partnerCollabBelief = null;
+
+        // set the progress bar to the correct value
+        $("#design .progress").attr("aria-valuenow", response.progress);
+        $("#design .progress-bar").css("width", response.progress + "%");
+
+        // set the task label
+        $("#design .task-label").text(response.label);
+
+        // save the current design task
+        currentDesignTask = response;
+
+        // update the design attributes for each option
+        $("#design tbody tr").each((index, element) => {
+            let option = response.options[index];
+            $(element).find(".design-label").html(option.label.replace(" ", "&nbsp;"));
+            $(element).find("img").attr("src", "images/" + option.image + ".png");
+            $(element).find(".design-upside").text(option.upside);
+            $(element).find(".design-downside").text(option.downside);
+        });
+    });
+
+
+    // bind behavior to collabBelief slider form submissions
+    $("#collabBelief-form").on("submit", (event) => {
+        // send a socket.io collabBelief survey submit with the responses
+        socket.emit("submit-collabBelief", {
+            "collabBelief": parseInt($("#collabBelief").val()),
+        });
+        $("#collabBelief-form button:submit").prop("disabled", true);
+        //$("#collabBelief-form button:submit .spinner-border").removeClass("d-none");
+        // disable collabBelief slider after click to submission button
+        $("#collabBelief").prop("disabled", true);
+        // enable editing and remove table hover
+        $("#design-button").prop("disabled", false);
+        $("#design table").addClass("table-hover");
+        if(partnerCollabBelief !== null) {
+            // enable robot button
+            $("#robot-button").prop("disabled", false);
+        }
+        // bypass the default form submission process
+        event.preventDefault();
+    });
+
+    var partnerCollabBelief = null;
+
+    // bind behavior to the socket.io show design task
+    socket.on("update-collab-belief", (response) => {
+        partnerCollabBelief = response.collabBelief;
+        console.log(response.collabBelief);
+        if($("#collabBelief").prop("disabled")) {
+            // enable robot button
+            $("#robot-button").prop("disabled", false);
+        }
     });
 
     // bind behavior to clicks on the logout link
@@ -292,44 +389,7 @@ $(document).ready(function() {
         socket.emit("content-request");
     });
 
-    var currentDesignTask = null;
 
-    // bind behavior to the socket.io show design task
-    socket.on("show-design-task", (response) => {
-        // hide the welcome, admin, wait, and thank-you screens
-        $("#welcome, #admin, #wait, #thank-you, #main-survey, #demographics-survey, #main-postsurvey").collapse("hide");
-        // show the design interface
-        $("#design").collapse("show");
-        // hide spinner on button and update text
-        $("#design .spinner-border").addClass("d-none");
-        $("#design .design-button-label").text("Confirm Decision");
-        // remove active status from any table rows
-        $("#design tbody tr").removeClass("table-active");
-        // remove background from collaborative and individual icons
-        $("#design-collaborative, #design-individual").removeClass("bg-warning-subtle");
-        // enable the design button and enable table hover
-        $("#design-button").prop("disabled", true);
-        $("#design table").addClass("table-hover");
-
-        // set the progress bar to the correct value
-        $("#design .progress").attr("aria-valuenow", response.progress);
-        $("#design .progress-bar").css("width", response.progress + "%");
-
-        // set the task label
-        $("#design .task-label").text(response.label);
-
-        // save the current design task
-        currentDesignTask = response;
-
-        // update the design attributes for each option
-        $("#design tbody tr").each((index, element) => {
-            let option = response.options[index];
-            $(element).find(".design-label").html(option.label.replace(" ", "&nbsp;"));
-            $(element).find("img").attr("src", "images/" + option.image + ".png");
-            $(element).find(".design-upside").text(option.upside);
-            $(element).find(".design-downside").text(option.downside);
-        });
-    });
 
     // bind behavior to the socket.io show thank you screen
     socket.on("show-thank-you-screen", (response) => {
@@ -339,3 +399,4 @@ $(document).ready(function() {
         $("#thank-you").collapse("show");
     });
 });
+

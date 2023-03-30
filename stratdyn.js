@@ -21,13 +21,14 @@ module.exports = function(io) {
     experiment.decisions = {};
     Object.keys(experiment.assignments).forEach((user) => {
         experiment.decisions[user] = Array(experiment.tasks.length).fill(
-            {"design": null, "strategy": null}
+            {"design": null, "strategy": null, "collabBelief": null}
         );
     });
 
     let currentTaskIndex = -3;
 
-    let showMediator = true;
+    let showMediator = false;
+    let showRobot= true;
 
     let timestamp = Math.floor(new Date().getTime() / 1000);
 
@@ -55,9 +56,21 @@ module.exports = function(io) {
         var username = null;
         
         function showDesignTask(context) {
-            // retrieve the current task
-            let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
+            // retrieve the current task and work with a cloned copy
+            let task = JSON.parse(
+                JSON.stringify(
+                    experiment.tasks[experiment.assignments[username][currentTaskIndex]]
+                )
+            );
+            task.partner = experiment.partners[username];
+            // clone partner task to avoid circular reference
+            task.partnerTask = JSON.parse(
+                JSON.stringify(
+                    experiment.tasks[experiment.assignments[task.partner][currentTaskIndex]]
+                )
+            );
             task.showMediator = showMediator;
+            task.showRobot = showRobot;
             // compute the progress percentage
             task.progress = Math.round(100*(currentTaskIndex+1)/(experiment.tasks.length+1));
             // send a socket.io show design task
@@ -187,16 +200,13 @@ module.exports = function(io) {
         socket.on('submit-decision', (request) => {
             if (username != null) {
                 // save the task decision
-                experiment.decisions[username][currentTaskIndex] = {
-                    "design": request.design,
-                    "strategy": request.strategy,
-                    "collabBelief": request.collabBelief,
-                }
+                experiment.decisions[username][currentTaskIndex].design = request.design;
+                experiment.decisions[username][currentTaskIndex].strategy = request.strategy;
+
                 console.log({
                     "user": username,
                     "design": request.design,
                     "strategy": request.strategy,
-                    "collabBelief": request.collabBelief,
                 });
                 // notify admins of new decision
                 Object.keys(admins).forEach(admin => {
@@ -218,7 +228,29 @@ module.exports = function(io) {
                     + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
                     + request.design + "\t"
                     + request.strategy + "\t"
-                    + request.collabBelief + "\t"
+                )
+            }
+        });
+
+        socket.on('submit-collabBelief', (request) => {
+            if (username != null) {
+                console.log({
+                    "user": username,
+                    "results": request
+                });
+                experiment.decisions[username][currentTaskIndex].collabBelief = request.collabBelief;
+                // send the updated collab belief to the partner
+                let partner = experiment.partners[username];
+                if (partner != null) {
+                    users[partner].emit(
+                        "update-collab-belief", 
+                        {"collabBelief": request.collabBelief}
+                    );
+                }
+                console.log(request)
+                console.log(username + "\t"
+                + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
+                + request.collabBelief + "\t"
                 )
             }
         });
