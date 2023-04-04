@@ -51,9 +51,9 @@ $(document).ready(function() {
         let hareDownside = parseInt(currentDesignTask.options[3].downside, 10)
         let normDevLossMath = ((hareUpside - stagDownside)/(hareUpside - stagDownside + stagUpside - hareDownside)*100)
         let normDevLoss = normDevLossMath.toFixed(0)
-        $("#robot-modal .modal-body p").text(
-            "Minimum required probability for collaboration= " + " " + "%" + normDevLoss  + 
-            " and your partner's estimated sentiment towards collaboration= " + "%" + partnerCollabBelief
+        $("#robot-modal .modal-body p").html(
+            " - " + " " + "Minimum required probability for collaboration= " + " " + "%" + normDevLoss  + 
+            "<br/> - " + " " + " Your partner's estimated sentiment towards collaboration= " + "%" + partnerCollabBelief
         );
         $("#robot-modal").modal("show");
         console.log(currentDesignTask);
@@ -133,6 +133,7 @@ $(document).ready(function() {
         $("#design table").addClass("table-hover");
         // enable slider and button
         $("#collabBelief-form button:submit").prop("disabled", false);
+        $("#collabBelief").val(50);
         $("#collabBelief").prop("disabled", false);
         // disable editing and remove table hover
         $("#design-button").prop("disabled", true);

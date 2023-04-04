@@ -32,19 +32,57 @@ module.exports = function(io) {
 
     let timestamp = Math.floor(new Date().getTime() / 1000);
 
-    let taskLogFile = timestamp + '-task.csv';
-    let preSurveyLogFile = timestamp + '-pre.csv';
-    let postSurveyLogFile = timestamp + '-post.csv';
+    let taskLogFile = "task_trial" + '.csv';
+    let preSurveyLogFile = "presurvey_trial" + '.csv';
+    //let postSurveyLogFile = timestamp + '-post.csv';
+    let postSurveyLogFile = "postsurvey_trial" + '.csv';
+    let demographicsSurveyLogFile = "demographics_survey_trial" + '.csv';
 
     fs.writeFile(
         taskLogFile, 
-        "timestamp" + "," + "username" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "\r\n",
+        "timestamp" + "," + "username" + "," + "partner" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "\r\n",
         err => {
             if (err) {
                 console.error(err);
             }
         }
     );
+
+    fs.writeFile(
+        preSurveyLogFile, 
+        "timestamp" + "," + "username" + "," + "q1t2" + "," + "q2r3" + "," + "q3c1" + "," + "q4r2" + 
+        "," + "q5t1" + "," + "q6r1" + "," + "q7c3" + "," + "q8t3" + "," + "q9c2" + "\r\n",
+        err => {
+            if (err) {
+                console.error(err);
+            }
+        }
+    );
+
+    fs.writeFile(
+        postSurveyLogFile, 
+        "timestamp" + "," + "username" + "," + "q1c2" + "," + "q2r1" + "," + "q3t3" + "," + "q4r2" + 
+        "," + "q5t1" + "," + "q6c3" + "," + "q7t2" + "," + "q8c1" + "," + "q9r3" + "\r\n",
+        err => {
+            if (err) {
+                console.error(err);
+            }
+        }
+    );
+
+    fs.writeFile(
+        demographicsSurveyLogFile, 
+        "timestamp" + "," + "username" + "," + "demographics-survey-q1" + "," + "demographics-survey-q2"
+         + "," + "demographics-survey-q3" + "," + "demographics-survey-q4" + 
+        "," + "demographics-survey-q5" + "," + "demographics-survey-q63" + 
+        "," + "demographics-survey-q7" + "\r\n",
+        err => {
+            if (err) {
+                console.error(err);
+            }
+        }
+    );
+
 
     // keep track of logged-in users and admins
     const users = {};
@@ -215,7 +253,7 @@ module.exports = function(io) {
                 let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
                 fs.appendFile(
                     taskLogFile, 
-                    Date.now() + "," + username + "," + task.label + "," + request.design + "," + request.strategy + "," + request.collabBelief + "\r\n",
+                    Date.now() + "," + username + "," + experiment.partners[username] + "," + task.label + "," + request.design + "," + request.strategy + "," + experiment.decisions[username][currentTaskIndex].collabBelief + "\r\n",
                     err => {
                         if (err) {
                           console.error(err);
@@ -225,9 +263,11 @@ module.exports = function(io) {
                 // TODO change to log file
                 console.log(
                     username + "\t"
+                    + experiment.partners[username] + "\t"
                     + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
                     + request.design + "\t"
                     + request.strategy + "\t"
+                    + experiment.decisions[username][currentTaskIndex].collabBelief + "\t"
                 )
             }
         });
@@ -267,7 +307,63 @@ module.exports = function(io) {
                 console.log(
                     username + "\t" 
                     + request["q1t2"] + "\t" 
-                    + request["q2r3"]
+                    + request["q2r3"] + "\t"
+                    + request["q3c1"] + "\t"
+                    + request["q4r2"] + "\t"
+                    + request["q5t1"] + "\t"
+                    + request["q6r1"] + "\t"
+                    + request["q7c3"] + "\t"
+                    + request["q8t3"] + "\t"
+                    + request["q9c2"]
+                );
+
+                fs.appendFile(
+                    preSurveyLogFile, 
+                    Date.now() + "," + username + "," + request["q1t2"] + "," + request["q2r3"] + 
+                    "," +  request["q3c1"] + "," +request["q4r2"] + "," + request["q5t1"] + "," + 
+                    "," + request["q6r1"] + "," + request["q7c3"] + "," + request["q8t3"]  + "," + 
+                    request["q9c2"] +  "\r\n",
+                    err => {
+                        if (err) {
+                          console.error(err);
+                        }
+                    }
+                );
+            }
+        });
+
+
+        socket.on('submit-postsurvey', (request) => {
+            if (username != null) {
+                console.log({
+                    "user": username,
+                    "results": request
+                });
+                console.log(request)
+                // TODO change to log file
+                console.log(
+                    username + "\t" 
+                    + request["q1c2"] + "\t" 
+                    + request["q2r1"] + "\t"
+                    + request["q3t3"] + "\t"
+                    + request["q4r2"] + "\t"
+                    + request["q5t1"] + "\t"
+                    + request["q6c3"] + "\t"
+                    + request["q7t2"] + "\t"
+                    + request["q8c1"] + "\t"
+                    + request["q9r3"]
+                );
+                fs.appendFile(
+                    postSurveyLogFile, 
+                    Date.now() + "," + username + "," + request["q1c2"] + "," + request["q2r1"] + 
+                    "," +  request["q3t3"] + "," +request["q4r2"] + "," + request["q5t1"] + "," + 
+                    "," + request["q6c3"] + "," + request["q7t2"] + "," + request["q8c1"]  + "," + 
+                    request["q9r3"] +  "\r\n",
+                    err => {
+                        if (err) {
+                          console.error(err);
+                        }
+                    }
                 );
             }
         });
@@ -279,6 +375,30 @@ module.exports = function(io) {
                     "results": request
                 });
                 console.log(request)
+                // TODO change to log file
+                console.log(
+                    username + "\t" 
+                    + request["demographics-survey-q1"] + "\t" 
+                    + request["demographics-survey-q2"] + "\t"
+                    + request["demographics-survey-q3"] + "\t"
+                    + request["demographics-survey-q4"] + "\t"
+                    + request["demographics-survey-q5"] + "\t"
+                    + request["demographics-survey-q6"] + "\t"
+                    + request["demographics-survey-q7"] 
+                );
+                fs.appendFile(
+                    demographicsSurveyLogFile, 
+                    Date.now() + "," + username + "," + request["demographics-survey-q1"] + "," + 
+                    request["demographics-survey-q2"] + "," +  request["demographics-survey-q3"] + 
+                    "," +request["demographics-survey-q4"] + "," + request["demographics-survey-q5"] + 
+                    ","  + request["demographics-survey-q6"] + "," + request["demographics-survey-q7"]  +  
+                    "\r\n",
+                    err => {
+                        if (err) {
+                          console.error(err);
+                        }
+                    }
+                );
             }
         });
 

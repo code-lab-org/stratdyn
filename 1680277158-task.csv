@@ -1,0 +1,5 @@
+timestamp,username,partner,task,design,strategy,collabBelief
+1680277197523,user001,Training Task 1,Design Y,individual,undefined
+1680277201719,user002,Training Task 1,Design K,collaborative,undefined
+1680277218257,user002,Training Task 2,Design K,collaborative,undefined
+1680277221281,user001,Training Task 2,Design M,collaborative,undefined
