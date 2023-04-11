@@ -20,9 +20,9 @@ module.exports = function(io) {
     // define space to save decisions
     experiment.decisions = {};
     Object.keys(experiment.assignments).forEach((user) => {
-        experiment.decisions[user] = Array(experiment.tasks.length).fill(
-            {"design": null, "strategy": null, "collabBelief": null}
-        );
+        experiment.decisions[user] = Array.from(Array(experiment.tasks.length), ()=> {
+            return {"design": null, "strategy": null, "collabBelief": null, "score": null};
+        });
     });
 
     let currentTaskIndex = -3;
@@ -40,7 +40,7 @@ module.exports = function(io) {
 
     fs.writeFile(
         taskLogFile, 
-        "timestamp" + "," + "username" + "," + "partner" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "\r\n",
+        "timestamp" + "," + "username" + "," + "partner" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "," + "score" + "," + "partnerScore" + "\r\n",
         err => {
             if (err) {
                 console.error(err);
@@ -148,15 +148,21 @@ module.exports = function(io) {
         function showAdminScreen(context) {
             let decisions = {};
             Object.keys(experiment.decisions).forEach((user) => {
+                let totalScore = 0;
+                for (let taskIndex = 4; taskIndex < Math.min(currentTaskIndex + 1, experiment.tasks.length); taskIndex++) {
+                    totalScore += experiment.decisions[user][taskIndex].score;
+                }
                 if (currentTaskIndex >= 0 && currentTaskIndex < experiment.tasks.length) {
                     decisions[user] = {
                         "online": user in users,
                         "task": experiment.tasks[experiment.assignments[user][currentTaskIndex]].label,
                         "design": experiment.decisions[user][currentTaskIndex].design,
-                        "strategy": experiment.decisions[user][currentTaskIndex].strategy
+                        "strategy": experiment.decisions[user][currentTaskIndex].strategy,
+                        "score": experiment.decisions[user][currentTaskIndex].score,
+                        "totalScore": totalScore
                     };
                 } else {
-                    decisions[user] = null;
+                    decisions[user] = {"online": user in users};
                 }
             });
             // send a socket.io show admin screen
@@ -238,13 +244,51 @@ module.exports = function(io) {
         socket.on('submit-decision', (request) => {
             if (username != null) {
                 // save the task decision
-                experiment.decisions[username][currentTaskIndex].design = request.design;
-                experiment.decisions[username][currentTaskIndex].strategy = request.strategy;
+                experiment.decisions[username][currentTaskIndex].design = request.design.replace("\xa0", " ");
+                experiment.decisions[username][currentTaskIndex].strategy = request.strategy.replace("\xa0", " ");
+                let partner = experiment.partners[username];
+                var myScore = null;
+                var partnerScore = null;
+                if (partner != null && experiment.decisions[partner]){
+                    if (experiment.decisions[partner][currentTaskIndex].design){
+                        let myDesign = experiment.decisions[username][currentTaskIndex].design.replace("\xa0", " ");
+                        let myTask = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
+                        let partnerDesign = experiment.decisions[partner][currentTaskIndex].design.replace("\xa0", " ");
+                        let partnerTask = experiment.tasks[experiment.assignments[partner][currentTaskIndex]];
+
+                        for (let myDesignIndex = 0; myDesignIndex < 4; myDesignIndex++) {
+                            if (myDesign === myTask.options[myDesignIndex].label) {
+                                for (let partnerDesignIndex = 0; partnerDesignIndex < 4; partnerDesignIndex++) {
+                                    if (partnerDesign === partnerTask.options[partnerDesignIndex].label) {
+                                        if (myDesignIndex < 3 && partnerDesignIndex < 3) {
+                                            myScore = parseInt(myTask.options[myDesignIndex].upside);
+                                            partnerScore = parseInt(partnerTask.options[partnerDesignIndex].upside);
+                                        } else if (myDesignIndex < 3 && partnerDesignIndex >= 3) {
+                                            myScore = parseInt(myTask.options[myDesignIndex].downside);
+                                            partnerScore = parseInt(partnerTask.options[partnerDesignIndex].upside);
+                                        } else if (myDesignIndex >= 3 && partnerDesignIndex < 3) {
+                                            myScore = parseInt(myTask.options[myDesignIndex].upside);
+                                            partnerScore = parseInt(partnerTask.options[partnerDesignIndex].downside);
+                                        } else if (myDesignIndex >= 3 && partnerDesignIndex >= 3) {
+                                            myScore = parseInt(myTask.options[myDesignIndex].downside);
+                                            partnerScore = parseInt(partnerTask.options[partnerDesignIndex].downside);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        experiment.decisions[username][currentTaskIndex].score = myScore;
+                        experiment.decisions[partner][currentTaskIndex].score = partnerScore;
+                    }
+                }
 
                 console.log({
                     "user": username,
                     "design": request.design,
                     "strategy": request.strategy,
+                    "score": myScore,
+                    "partnerScore": partnerScore,
                 });
                 // notify admins of new decision
                 Object.keys(admins).forEach(admin => {
@@ -253,22 +297,13 @@ module.exports = function(io) {
                 let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
                 fs.appendFile(
                     taskLogFile, 
-                    Date.now() + "," + username + "," + experiment.partners[username] + "," + task.label + "," + request.design + "," + request.strategy + "," + experiment.decisions[username][currentTaskIndex].collabBelief + "\r\n",
+                    Date.now() + "," + username + "," + experiment.partners[username] + "," + task.label + "," + request.design + "," + request.strategy + "," + experiment.decisions[username][currentTaskIndex].collabBelief + ", " + myScore + ", " + partnerScore + "\r\n",
                     err => {
                         if (err) {
                           console.error(err);
                         }
                     }
                 );
-                // TODO change to log file
-                console.log(
-                    username + "\t"
-                    + experiment.partners[username] + "\t"
-                    + experiment.tasks[experiment.assignments[username][currentTaskIndex]].label + "\t"
-                    + request.design + "\t"
-                    + request.strategy + "\t"
-                    + experiment.decisions[username][currentTaskIndex].collabBelief + "\t"
-                )
             }
         });
 
@@ -281,7 +316,7 @@ module.exports = function(io) {
                 experiment.decisions[username][currentTaskIndex].collabBelief = request.collabBelief;
                 // send the updated collab belief to the partner
                 let partner = experiment.partners[username];
-                if (partner != null) {
+                if (partner != null && partner in users) {
                     users[partner].emit(
                         "update-collab-belief", 
                         {"collabBelief": request.collabBelief}

@@ -39,8 +39,100 @@ $(document).ready(function() {
         }
     });
 
+
+    
+    let chart = new Chart("myChart", {
+        type: "scatter",
+        data: {
+          datasets: [
+          {
+            label: "Design K",
+            pointRadius: 4,
+            pointBackgroundColor: "rgba(0,255,0,1)",
+            borderColor: "rgba(0,255,0,1)",
+            pointBorderWidth: 0,
+            data: [{x:0, y:-100}, {x:100, y:100},]
+          },
+          {
+            label: "Design L",
+            pointRadius: 4,
+            pointBackgroundColor: "rgba(0,175,0,1)",
+            borderColor: "rgba(0,175,0,1)",
+            pointBorderWidth: 0,
+            data: [{x:0, y:-80}, {x:100, y:80},]
+          },
+          {
+            label: "Design M",
+            pointRadius: 4,
+            pointBackgroundColor: "rgba(0,100,0,1)",
+            borderColor: "rgba(0,100,0,1)",
+            pointBorderWidth: 0,
+            data: [{x:0, y:-70}, {x:100, y:70},]
+          },
+          {
+            label: "Design Y",
+            pointRadius: 4,
+            pointBackgroundColor: "rgba(230,0,0,1)",
+            borderColor: "rgba(255,0,0,1)",
+            pointBorderWidth: 0,
+            data: [{x:0, y:50}, {x:100, y:50},]
+          },
+          {
+            label: "My Belief",
+            pointRadius: 0,
+            pointBackgroundColor: "rgba(0,0,255,1)",
+            borderColor: "rgba(0,0,255,1)",
+            borderDash: [5,5],
+            data: [{x:40, y:-100}, {x:40, y:100},]
+          },
+          {
+            label: "My Partner's Belief",
+            pointRadius: 0,
+            pointBackgroundColor: "rgba(150,0,150,1)",
+            borderColor: "rgba(150,0,150,1)",
+            borderDash: [10,5],
+            data: [{x:60, y:-100}, {x:60, y:100},]
+          },
+          {
+            label: "Min Required Belief",
+            pointRadius: 0,
+            pointBackgroundColor: "rgba(0,0,0,1)",
+            borderColor: "rgba(0,0,0,1)",
+            borderDash: [18,5],
+            data: [{x:50, y:-100}, {x:50, y:100},]
+          }
+          
+        ]
+        },
+        options: {
+            showLine: true,
+            scales: {
+                y: {
+                    title: {text:"Expected Value", display: true}
+                },
+                x: {
+                    title: {text:"Probability of Collaboration", display: true}
+                }
+            }
+        }
+      });
+
     // bind behavior to clicks on robot
     $("#robot-button").on("click", () => {
+        let upsideK = parseInt(currentDesignTask.options[0].upside, 10)
+        let downsideK = parseInt(currentDesignTask.options[0].downside, 10)
+        let upsideL = parseInt(currentDesignTask.options[1].upside, 10)
+        let downsideL = parseInt(currentDesignTask.options[1].downside, 10)
+        let upsideM = parseInt(currentDesignTask.options[2].upside, 10)
+        let downsideM = parseInt(currentDesignTask.options[2].downside, 10)
+        let upsideY = parseInt(currentDesignTask.options[3].upside, 10)
+        let downsideY = parseInt(currentDesignTask.options[3].downside, 10)
+        let probability = (parseInt(partnerCollabBelief, 10)/100)
+        let myProb = parseInt($("#collabBelief").val())
+        let K_EV = (upsideK*probability) + (downsideK*(1-probability))
+        let L_EV = (upsideL*probability) + (downsideL*(1-probability))
+        let M_EV = (upsideM*probability) + (downsideM*(1-probability))
+        let Y_EV = (upsideY*probability) + (downsideY*(1-probability))
         // currentDesignTask.options[$(event.currentTarget).index()].upside
         // currentDesignTask.options[$(event.currentTarget).index()].downside
         // currentDesignTask.options[3].upside
@@ -52,10 +144,41 @@ $(document).ready(function() {
         let normDevLossMath = ((hareUpside - stagDownside)/(hareUpside - stagDownside + stagUpside - hareDownside)*100)
         let normDevLoss = normDevLossMath.toFixed(0)
         $("#robot-modal .modal-body p").html(
-            " - " + " " + "Minimum required probability for collaboration= " + " " + "%" + normDevLoss  + 
-            "<br/> - " + " " + " Your partner's estimated sentiment towards collaboration= " + "%" + partnerCollabBelief
+            " - " + " " + "Minimum Required Belief= " + " " + "%" + normDevLoss  + 
+            "<br/> - " + " " + "Partner Belief= " + "%" + partnerCollabBelief 
         );
+        chart.data.datasets[0].data[0].y= downsideK;
+        chart.data.datasets[0].data[1].y= upsideK;
+        chart.data.datasets[1].data[0].y= downsideL;
+        chart.data.datasets[1].data[1].y= upsideL;
+        chart.data.datasets[2].data[0].y= downsideM;
+        chart.data.datasets[2].data[1].y= upsideM;
+        chart.data.datasets[3].data[0].y= downsideY;
+        chart.data.datasets[3].data[1].y= upsideY;
+        chart.data.datasets[4].data[0].x= myProb;
+        chart.data.datasets[4].data[0].y= Math.min(downsideK,downsideL, downsideM, downsideY);
+        chart.data.datasets[4].data[1].x= myProb;
+        chart.data.datasets[4].data[1].y= Math.max(upsideK,upsideL, upsideM, upsideY);
+        chart.data.datasets[5].data[0].x= partnerCollabBelief;
+        chart.data.datasets[5].data[0].y= Math.min(downsideK,downsideL, downsideM, downsideY);
+        chart.data.datasets[5].data[1].x= partnerCollabBelief;
+        chart.data.datasets[5].data[1].y= Math.max(upsideK,upsideL, upsideM, upsideY);
+        if (upsideY === downsideY) {
+        chart.data.datasets[6].data[0].x= normDevLoss;
+        chart.data.datasets[6].data[0].y= Math.min(downsideK,downsideL, downsideM, downsideY);
+        chart.data.datasets[6].data[1].x= normDevLoss;
+        chart.data.datasets[6].data[1].y= Math.max(upsideK,upsideL, upsideM, upsideY);
+        chart.show(6)
+    }   else {
+        chart.data.datasets[6].data[0].x= 100;
+        chart.data.datasets[6].data[0].y= Math.min(downsideK,downsideL, downsideM, downsideY);
+        chart.data.datasets[6].data[1].x= 100;
+        chart.data.datasets[6].data[1].y= Math.max(upsideK,upsideL, upsideM, upsideY);
+        chart.hide(6)
+    }
+        chart.update();
         $("#robot-modal").modal("show");
+
         console.log(currentDesignTask);
     });
 
@@ -329,6 +452,7 @@ $(document).ready(function() {
 
     // bind behavior to the socket.io show admin screen
     socket.on("show-admin-screen", (response) => {
+        console.log(response);
         // hide the wait, design and thank you screens
         $("#welcome, #wait, #design, #thank-you, #main-survey, #demographics-survey, #main-postsurvey").collapse("hide");
         // show the admin screen
@@ -344,6 +468,9 @@ $(document).ready(function() {
         // update user status table
         let users = Object.keys(response.decisions);
         users.forEach((user) => {
+            console.log(user);
+            console.log(response.decisions[user]);
+            console.log(response.decisions[user].online);
             let row = (
                 "<tr><th scope='row'>" 
                 + (
@@ -366,6 +493,13 @@ $(document).ready(function() {
                             response.decisions[user].strategy=="collaborative" ? 
                             "<span class='text-success'><i class='bi-c-circle-fill'></i> collaborative</span>" : 
                             "<span class='text-danger'><i class='bi-info-circle-fill'></i> individual</span>"
+                        ) : ""
+                    ) + "</td>"
+                    + "<td>" + (
+                        response.decisions[user].score ?
+                        (
+                            response.decisions[user].score 
+                            + " (" + response.decisions[user].totalScore + ")"
                         ) : ""
                     ) + "</td>"
                 );
