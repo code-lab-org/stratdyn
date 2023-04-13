@@ -40,7 +40,7 @@ module.exports = function(io) {
 
     fs.writeFile(
         taskLogFile, 
-        "timestamp" + "," + "username" + "," + "partner" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "," + "score" + "," + "partnerScore" + "\r\n",
+        "timestamp" + "," + "username" + "," + "partner" + "," + "task" + "," + "design" + "," + "strategy" + "," + "collabBelief" + "," + "usedRobot" + ", " + "score" + "," + "partnerScore" + "\r\n",
         err => {
             if (err) {
                 console.error(err);
@@ -243,9 +243,12 @@ module.exports = function(io) {
 
         socket.on('submit-decision', (request) => {
             if (username != null) {
+                console.log(request);
                 // save the task decision
                 experiment.decisions[username][currentTaskIndex].design = request.design.replace("\xa0", " ");
-                experiment.decisions[username][currentTaskIndex].strategy = request.strategy.replace("\xa0", " ");
+                if (request.strategy) {
+                    experiment.decisions[username][currentTaskIndex].strategy = request.strategy.replace("\xa0", " ");
+                }
                 let partner = experiment.partners[username];
                 var myScore = null;
                 var partnerScore = null;
@@ -297,7 +300,7 @@ module.exports = function(io) {
                 let task = experiment.tasks[experiment.assignments[username][currentTaskIndex]];
                 fs.appendFile(
                     taskLogFile, 
-                    Date.now() + "," + username + "," + experiment.partners[username] + "," + task.label + "," + request.design + "," + request.strategy + "," + experiment.decisions[username][currentTaskIndex].collabBelief + ", " + myScore + ", " + partnerScore + "\r\n",
+                    Date.now() + "," + username + "," + experiment.partners[username] + "," + task.label + "," + request.design + "," + request.strategy + "," + experiment.decisions[username][currentTaskIndex].collabBelief + ", " + request.usedRobot + ", " + myScore + ", " + partnerScore + "\r\n",
                     err => {
                         if (err) {
                           console.error(err);
@@ -392,7 +395,7 @@ module.exports = function(io) {
                     postSurveyLogFile, 
                     Date.now() + "," + username + "," + request["q1c2"] + "," + request["q2r1"] + 
                     "," +  request["q3t3"] + "," +request["q4r2"] + "," + request["q5t1"] + "," + 
-                    "," + request["q6c3"] + "," + request["q7t2"] + "," + request["q8c1"]  + "," + 
+                    request["q6c3"] + "," + request["q7t2"] + "," + request["q8c1"]  + "," + 
                     request["q9r3"] +  "\r\n",
                     err => {
                         if (err) {

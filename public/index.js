@@ -119,6 +119,7 @@ $(document).ready(function() {
 
     // bind behavior to clicks on robot
     $("#robot-button").on("click", () => {
+        usedRobot = true;
         let upsideK = parseInt(currentDesignTask.options[0].upside, 10)
         let downsideK = parseInt(currentDesignTask.options[0].downside, 10)
         let upsideL = parseInt(currentDesignTask.options[1].upside, 10)
@@ -233,10 +234,12 @@ $(document).ready(function() {
             "strategy": $("#design .table-active").data("strategy"),
             "upside": parseInt($("#design .table-active .design-upside").text()),
             "downside": parseInt($("#design .table-active .design-downside").text()),
+            "usedRobot": usedRobot,
         });
     });
 
     var currentDesignTask = null;
+    var usedRobot = false;
 
     // bind behavior to the socket.io show design task
     socket.on("show-design-task", (response) => {
@@ -269,6 +272,7 @@ $(document).ready(function() {
         } else {
             $("#robot").addClass("d-none");
         }
+        usedRobot = false;
         partnerCollabBelief = null;
 
         // set the progress bar to the correct value
