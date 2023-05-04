@@ -88,7 +88,7 @@ $(document).ready(function() {
           {
             label: "My Partner's Belief",
             pointRadius: 0,
-            pointBackgroundColor: "rgba(150,0,150,1)",
+            pointBackgroundColor: "rgba(100,0,100,1)",
             borderColor: "rgba(150,0,150,1)",
             borderDash: [10,5],
             data: [{x:60, y:-100}, {x:60, y:100},]
