@@ -32,11 +32,11 @@ module.exports = function(io) {
 
     let timestamp = Math.floor(new Date().getTime() / 1000);
 
-    let taskLogFile = "task_experimentalgroup_" + 'session6.csv';
-    let preSurveyLogFile = "presurvey_experimentalgroup_" + 'session6.csv';
+    let taskLogFile = "task_experimentalgroup_" + 'session7.csv';
+    let preSurveyLogFile = "presurvey_experimentalgroup_" + 'session7.csv';
     //let postSurveyLogFile = timestamp + '-post.csv';
-    let postSurveyLogFile = "postsurvey_experimentalgroup_" + 'session6.csv';
-    let demographicsSurveyLogFile = "demographics_survey_experimentalgroup_" + 'session6.csv';
+    let postSurveyLogFile = "postsurvey_experimentalgroup_" + 'session7.csv';
+    let demographicsSurveyLogFile = "demographics_survey_experimentalgroup_" + 'session7.csv';
 
     fs.writeFile(
         taskLogFile, 
