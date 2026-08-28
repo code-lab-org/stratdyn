@@ -45,6 +45,15 @@ Column names encode the underlying construct and item number: `t` = Trust,
 The same 9 underlying items appear in both surveys, reworded in the past
 tense for the post-survey and presented in a different on-screen order.
 
+**Fixed data quality issue:** `presurvey_*.csv` previously had a stray extra
+field in every row. The server's write handler (`stratdyn.js`,
+`submit-survey`) had a doubled comma between the `q5t1` and `q6r1` values,
+so every data row had 12 comma-separated fields against the 11-column
+header. The write handler has been fixed, and the
+historical `presurvey_*.csv` files in this repo have been corrected in
+place (the stray field removed, remaining values re-aligned to the header)
+— they no longer need any special handling to read correctly.
+
 | Column | Description |
 |---|---|
 | `timestamp` | Unix ms timestamp when the survey was submitted |
@@ -82,6 +91,12 @@ tense for the post-survey and presented in a different on-screen order.
 
 One row per participant. Question text and response options are taken
 verbatim from `public/index.html`.
+
+`demographics_control_04.csv` has one duplicate submission (`user0038`
+appears twice, ~100 seconds apart, with identical answers) — a double
+form-submit rather than two different responses. Keep the first row and
+drop the second when using this file; `analysis/build_survey_datatable.py`
+does this automatically.
 
 | Column | Question | Response |
 |---|---|---|
