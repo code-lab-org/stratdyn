@@ -30,13 +30,10 @@ module.exports = function(io) {
     let showMediator = false;
     let showRobot= true;
 
-    let timestamp = Math.floor(new Date().getTime() / 1000);
-
-    let taskLogFile = "task_experimentalgroup_" + 'session7.csv';
-    let preSurveyLogFile = "presurvey_experimentalgroup_" + 'session7.csv';
-    //let postSurveyLogFile = timestamp + '-post.csv';
-    let postSurveyLogFile = "postsurvey_experimentalgroup_" + 'session7.csv';
-    let demographicsSurveyLogFile = "demographics_survey_experimentalgroup_" + 'session7.csv';
+    let taskLogFile = "task_arm_00.csv";
+    let preSurveyLogFile = "presurvey_arm_00.csv";
+    let postSurveyLogFile = "postsurvey_arm_00.csv";
+    let demographicsSurveyLogFile = "demographics_arm_00.csv";
 
     fs.writeFile(
         taskLogFile, 

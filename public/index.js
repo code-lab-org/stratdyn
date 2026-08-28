@@ -377,8 +377,8 @@ $(document).ready(function() {
             "demographics-survey-q1": $("input:radio[name=demographics-survey-q1]:checked").val(),
             "demographics-survey-q2": $("#demographics-survey-q2").val(),
             "demographics-survey-q3": $("#demographics-survey-q3").val(),
-            "demographics-survey-q4": $("#demographics-survey-q3").val(),
-            "demographics-survey-q5": $("#demographics-survey-q3").val(),
+            "demographics-survey-q4": $("#demographics-survey-q4").val(),
+            "demographics-survey-q5": $("#demographics-survey-q5").val(),
             "demographics-survey-q6": $("input:radio[name=demographics-survey-q6]:checked").val(),
             "demographics-survey-q7": $("input:radio[name=demographics-survey-q7]:checked").val()
         });
