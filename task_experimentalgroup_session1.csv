@@ -1,9 +1,161 @@
 timestamp,username,partner,task,design,strategy,collabBelief,usedRobot, score,partnerScore
-1682349281163,user0019,user0020,Training Task 1,Design Y,individual,71, true, null, null
-1682349291649,user0020,user0019,Training Task 1,Design L,collaborative,26, true, -15, 50
-1682349311269,user0022,user0021,Training Task 1,Design Y,individual,100, true, null, null
-1682349314960,user0021,user0022,Training Task 1,Design K,collaborative,73, false, -45, 50
-1682349329328,user0019,user0020,Task Washington,Design K,collaborative,33, false, null, null
-1682349338853,user0020,user0019,Task Pennsylvania,Design K,collaborative,28, true, 96, 96
-1682349357075,user0022,user0021,Task New York,Design K,collaborative,98, true, null, null
-1682349361936,user0021,user0022,Task Colorado,Design Y,individual,50, false, 50, -25
+1682093802457,user0016,user0015,Training Task 1,Design K,collaborative,78, true, null, null
+1682093816746,user0018,user0017,Training Task 1,,undefined,98, true, null, null
+1682093846221,user0017,user0018,Training Task 1,Design K,collaborative,85, true, null, null
+1682093866869,user0015,user0016,Training Task 1,Design M,collaborative,96, true, 111, 92
+1682093951650,user0018,user0017,Training Task 2,Design K,collaborative,99, false, null, null
+1682093954383,user0017,user0018,Training Task 2,Design M,collaborative,91, true, 86, 95
+1682093978612,user0016,user0015,Training Task 2,Design M,collaborative,85, true, null, null
+1682094020481,user0015,user0016,Training Task 2,Design K,collaborative,95, false, 95, 86
+1682094049143,user0018,user0017,Training Task 3,Design K,collaborative,92, false, null, null
+1682094071697,user0017,user0018,Training Task 3,Design K,collaborative,92, true, 57, 57
+1682094077555,user0016,user0015,Training Task 3,Design Y,individual,93, true, null, null
+1682094081102,user0015,user0016,Training Task 3,Design M,collaborative,84, true, 13, 83
+1682094124295,user0018,user0017,Training Task 4,Design K,collaborative,95, false, null, null
+1682094129465,user0017,user0018,Training Task 4,Design K,collaborative,92, true, 90, 90
+1682094143513,user0015,user0016,Training Task 4,Design Y,individual,59, true, null, null
+1682094145006,user0016,user0015,Training Task 4,Design Y,individual,87, true, 50, 50
+1682094169470,user0015,user0016,Task Washington,Design M,collaborative,86, true, null, null
+1682094172857,user0016,user0015,Task Pennsylvania,Design M,collaborative,88, true, 122, 122
+1682094174062,user0018,user0017,Task New York,Design K,collaborative,83, false, null, null
+1682094183848,user0017,user0018,Task Colorado,Design L,collaborative,91, true, 105, 82
+1682094206765,user0016,user0015,Task New York,Design L,collaborative,78, false, null, null
+1682094213114,user0015,user0016,Task Colorado,Design K,collaborative,92, true, 130, 106
+1682094221395,user0018,user0017,Task Louisiana,Design K,collaborative,82, false, null, null
+1682094229245,user0017,user0018,Task Alabama,Design L,collaborative,84, true, 105, 88
+1682094249158,user0018,user0017,Task Florida,Design K,collaborative,76, false, null, null
+1682094262704,user0016,user0015,Task Louisiana,Design L,collaborative,87, false, null, null
+1682094266133,user0015,user0016,Task Alabama,Design K,collaborative,93, true, 130, 114
+1682094270910,user0017,user0018,Task Florida,Design M,collaborative,85, true, 75, 85
+1682094291831,user0016,user0015,Task Florida,Design Y,individual,87, false, null, null
+1682094293163,user0018,user0017,Task Maryland,Design K,collaborative,83, true, null, null
+1682094295720,user0015,user0016,Task Florida,Design K,collaborative,94, false, 0, 100
+1682094300264,user0017,user0018,Task Alaska,Design K,collaborative,90, true, 105, 100
+1682094327656,user0018,user0017,Task Wyoming,Design K,collaborative,87, false, null, null
+1682094328635,user0015,user0016,Task Alaska,Design M,collaborative,93, false, null, null
+1682094332485,user0016,user0015,Task Maryland,Design K,collaborative,83, true, 100, 130
+1682094341960,user0017,user0018,Task Delaware,Design L,collaborative,82, true, 82, 130
+1682094360968,user0018,user0017,Task Oklahoma,Design K,collaborative,87, false, null, null
+1682094365319,user0016,user0015,Task Wyoming,Design K,collaborative,83, false, null, null
+1682094371117,user0015,user0016,Task Delaware,Design M,collaborative,92, false, 106, 130
+1682094376128,user0017,user0018,Task North Carolina,Design L,collaborative,90, true, 100, 95
+1682094395486,user0015,user0016,Task North Carolina,Design M,collaborative,94, false, null, null
+1682094398464,user0016,user0015,Task Oklahoma,Design M,collaborative,83, true, 106, 114
+1682094404238,user0018,user0017,Task California,Design K,collaborative,89, false, null, null
+1682094412836,user0017,user0018,Task Hawaii,Design M,collaborative,85, true, 72, 122
+1682094428305,user0015,user0016,Task Hawaii,Design L,collaborative,98, false, null, null
+1682094430205,user0018,user0017,Task Texas,Design K,collaborative,90, false, null, null
+1682094430232,user0016,user0015,Task California,Design K,collaborative,84, false, 122, 100
+1682094439561,user0017,user0018,Task Tennessee,Design L,collaborative,90, true, 82, 100
+1682094450594,user0016,user0015,Task Texas,Design K,collaborative,92, false, null, null
+1682094452139,user0018,user0017,Task Ohio,Design K,collaborative,92, false, null, null
+1682094455096,user0015,user0016,Task Tennessee,Design K,collaborative,95, false, 106, 100
+1682094472914,user0017,user0018,Task Kentucky,Design K,collaborative,89, true, 88, 107
+1682094490032,user0016,user0015,Task Ohio,Design M,collaborative,94, false, null, null
+1682094493368,user0015,user0016,Task Kentucky,Design M,collaborative,100, false, 114, 122
+1682094512266,user0018,user0017,Task  Montana,Design K,collaborative,93, false, null, null
+1682094523254,user0017,user0018,Task  Montana,Design L,collaborative,85, true, 60, 50
+1682094545735,user0018,user0017,Task North Carolina,Design K,collaborative,91, false, null, null
+1682094547537,user0016,user0015,Task  Montana,Design Y,individual,84, false, null, null
+1682094555889,user0015,user0016,Task  Montana,Design L,collaborative,98, false, 0, 75
+1682094556547,user0017,user0018,Task Oklahoma,Design K,collaborative,76, true, 95, 88
+1682094580014,user0016,user0015,Task North Carolina,Design M,collaborative,86, false, null, null
+1682094582075,user0015,user0016,Task Oklahoma,Design M,collaborative,98, false, 106, 114
+1682094582460,user0017,user0018,Task Maryland,Design K,collaborative,88, true, null, null
+1682094584567,user0018,user0017,Task Alaska,Design K,collaborative,95, false, 105, 100
+1682094601918,user0015,user0016,Task Maryland,Design K,collaborative,99, false, null, null
+1682094602884,user0016,user0015,Task Alaska,Design M,collaborative,87, false, 130, 100
+1682094605328,user0018,user0017,Task Tennessee,Design K,collaborative,95, false, null, null
+1682094625021,user0017,user0018,Task Texas,Design K,collaborative,85, true, 100, 106
+1682094637170,user0016,user0015,Task Tennessee,Design K,collaborative,88, false, null, null
+1682094639188,user0018,user0017,Task Oregon,Design K,collaborative,97, false, null, null
+1682094639731,user0015,user0016,Task Texas,Design K,collaborative,99, false, 100, 106
+1682094656041,user0017,user0018,Task New Jersey,Design L,collaborative,90, true, 122, 72
+1682094666911,user0018,user0017,Task Maine,Design K,collaborative,98, false, null, null
+1682094673114,user0015,user0016,Task New Jersey,Design L,collaborative,99, false, null, null
+1682094678682,user0016,user0015,Task Oregon,Design M,collaborative,88, false, 100, 122
+1682094683984,user0017,user0018,Task Arizona,Design L,collaborative,89, true, 100, 106
+1682094700218,user0015,user0016,Task Arizona,Design K,collaborative,99, false, null, null
+1682094700608,user0018,user0017,Task Utah,Design K,collaborative,98, false, null, null
+1682094709319,user0016,user0015,Task Maine,Design K,collaborative,93, false, 106, 114
+1682094714469,user0017,user0018,Task Utah,Design L,collaborative,88, true, 80, 70
+1682094729665,user0018,user0017,Task Colorado,Design K,collaborative,99, false, null, null
+1682094735630,user0016,user0015,Task Utah,Design Y,individual,92, false, null, null
+1682094739801,user0017,user0018,Task New York,Design M,collaborative,85, true, 95, 130
+1682094740894,user0015,user0016,Task Utah,Design L,collaborative,99, false, 5, 90
+1682094753158,user0015,user0016,Task New York,Design L,collaborative,99, false, null, null
+1682094758611,user0018,user0017,Task Delaware,Design K,collaborative,97, false, null, null
+1682094759775,user0016,user0015,Task Colorado,Design K,collaborative,87, false, 130, 106
+1682094768957,user0017,user0018,Task Wyoming,Design L,collaborative,97, true, 105, 95
+1682094785489,user0018,user0017,Task Nebraska,Design K,collaborative,99, false, null, null
+1682094786640,user0015,user0016,Task Wyoming,Design K,collaborative,99, false, null, null
+1682094792961,user0016,user0015,Task Delaware,Design M,collaborative,86, true, 106, 130
+1682094799390,user0017,user0018,Task Wisconsin,Design M,collaborative,98, true, 100, 100
+1682094813632,user0018,user0017,Task Virginia,Design K,collaborative,100, false, null, null
+1682094819812,user0016,user0015,Task Nebraska,Design L,collaborative,83, false, null, null
+1682094820636,user0015,user0016,Task Wisconsin,Design K,collaborative,97, false, 114, 114
+1682094825939,user0017,user0018,Task Illinois,Design K,collaborative,90, true, 72, 115
+1682094841155,user0015,user0016,Task Illinois,Design M,collaborative,100, false, null, null
+1682094841341,user0018,user0017,Task Illinois,Design K,collaborative,87, false, null, null
+1682094855345,user0016,user0015,Task Virginia,Design L,collaborative,91, false, 130, 100
+1682094859487,user0017,user0018,Task Virginia,Design K,collaborative,97, true, 115, 72
+1682094874382,user0018,user0017,Task  Mississippi,Design K,collaborative,90, false, null, null
+1682094875906,user0015,user0016,Task Virginia,Design L,collaborative,98, false, null, null
+1682094885444,user0016,user0015,Task Illinois,Design M,collaborative,84, false, 100, 130
+1682094886668,user0017,user0018,Task  Mississippi,Design M,collaborative,91, true, 45, 55
+1682094902655,user0018,user0017,Task Kansas,Design K,collaborative,94, false, null, null
+1682094927253,user0016,user0015,Task  Mississippi,Design K,collaborative,83, false, null, null
+1682094933145,user0015,user0016,Task  Mississippi,Design K,collaborative,100, false, 55, 55
+1682094935500,user0017,user0018,Task Michigan,Design K,collaborative,94, true, 95, 107
+1682094946591,user0018,user0017,Task Nevada,Design K,collaborative,95, false, null, null
+1682094948128,user0016,user0015,Task Kansas,Design L,collaborative,85, false, null, null
+1682094951680,user0015,user0016,Task Michigan,Design L,collaborative,96, false, 106, 122
+1682094962772,user0017,user0018,Task Minnesota,Design L,collaborative,93, true, 100, 130
+1682094974751,user0018,user0017,Task Minnesota,Design K,collaborative,98, false, null, null
+1682094977701,user0015,user0016,Task Minnesota,Design L,collaborative,96, false, null, null
+1682094984891,user0017,user0018,Task Nevada,Design M,collaborative,91, true, 115, 72
+1682094987699,user0016,user0015,Task Nevada,Design K,collaborative,92, false, 130, 100
+1682094998746,user0015,user0016,Task Nevada,Design K,collaborative,97, false, null, null
+1682094999271,user0018,user0017,Task New Jersey,Design K,collaborative,97, false, null, null
+1682095000666,user0016,user0015,Task Minnesota,Design L,collaborative,86, false, 100, 130
+1682095014627,user0017,user0018,Task Oregon,Design L,collaborative,91, true, 88, 107
+1682095032372,user0015,user0016,Task Oregon,Design M,collaborative,99, false, null, null
+1682095035793,user0016,user0015,Task New Jersey,Design L,collaborative,91, false, 122, 100
+1682095036213,user0018,user0017,Task Washington,Design K,collaborative,96, false, null, null
+1682095043906,user0017,user0018,Task Pennsylvania,Design M,collaborative,98, true, 122, 96
+1682095058945,user0015,user0016,Task Pennsylvania,Design M,collaborative,99, false, null, null
+1682095061651,user0018,user0017,Task Idoha,Design K,collaborative,97, false, null, null
+1682095062844,user0016,user0015,Task Washington,Design M,collaborative,96, false, 122, 122
+1682095064869,user0017,user0018,Task Idoha,Design M,collaborative,96, true, 95, 75
+1682095077259,user0015,user0016,Task Idoha,Design M,collaborative,100, false, null, null
+1682095079036,user0018,user0017,Task Wisconsin,Design K,collaborative,98, false, null, null
+1682095082227,user0016,user0015,Task Idoha,Design Y,individual,96, false, 115, 15
+1682095091363,user0017,user0018,Task Nebraska,Design K,collaborative,91, true, 100, 114
+1682095107365,user0018,user0017,Task Michigan,Design L,collaborative,99, false, null, null
+1682095108058,user0016,user0015,Task Wisconsin,Design K,collaborative,83, false, null, null
+1682095109098,user0015,user0016,Task Nebraska,Design L,collaborative,99, true, 114, 114
+1682095118959,user0017,user0018,Task Kansas,Design M,collaborative,87, true, 96, 106
+1682095129144,user0015,user0016,Task Kansas,Design L,collaborative,97, false, null, null
+1682095129694,user0016,user0015,Task Michigan,Design L,collaborative,91, false, 106, 122
+1682095135843,user0018,user0017,Task Alabama,Design K,collaborative,98, false, null, null
+1682095150247,user0017,user0018,Task Louisiana,Design L,collaborative,97, true, 114, 130
+1682095161980,user0015,user0016,Task Louisiana,Design L,collaborative,98, false, null, null
+1682095162971,user0018,user0017,Task Kentucky,Design M,collaborative,100, false, null, null
+1682095165577,user0016,user0015,Task Alabama,Design K,collaborative,92, false, 130, 114
+1682095178118,user0017,user0018,Task Ohio,Design L,collaborative,93, true, 96, 114
+1682095190320,user0015,user0016,Task Ohio,Design M,collaborative,97, false, null, null
+1682095191092,user0016,user0015,Task Kentucky,Design M,collaborative,88, false, 114, 122
+1682095191254,user0018,user0017,Task Michigan,Design L,collaborative,100, false, null, null
+1682095207766,user0017,user0018,Task Massachusetts,Design L,collaborative,97, true, 65, 106
+1682095221817,user0015,user0016,Task Massachusetts,Design L,collaborative,98, false, null, null
+1682095222360,user0016,user0015,Task Michigan,Design L,collaborative,88, false, 106, 65
+1682095223035,user0018,user0017,Task Arizona,Design K,collaborative,99, false, null, null
+1682095233732,user0017,user0018,Task Maine,Design L,collaborative,100, true, 95, 114
+1682095246639,user0018,user0017,Task Hawaii,Design L,collaborative,100, false, null, null
+1682095249615,user0015,user0016,Task Maine,Design K,collaborative,98, false, null, null
+1682095255905,user0016,user0015,Task Arizona,Design K,collaborative,87, false, 114, 106
+1682095259996,user0017,user0018,Task California,Design L,collaborative,98, true, 107, 100
+1682095273095,user0015,user0016,Task California,Design K,collaborative,99, false, null, null
+1682095273760,user0016,user0015,Task Hawaii,Design L,collaborative,95, false, 100, 122
+1682095274282,user0018,user0017,Task Pennsylvania,Design M,collaborative,100, false, null, null
+1682095283655,user0017,user0018,Task Washington,Design M,collaborative,99, true, 122, 122
