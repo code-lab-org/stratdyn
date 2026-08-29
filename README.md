@@ -57,6 +57,13 @@ public/                 Client-side HTML/CSS/JS for the experiment UI
 results/                Collected data, one subfolder per study arm
   control/              Control-group sessions
   treatment/             Treatment-group ("experimental group") sessions
+analysis/               Scripts for turning results/ into analysis-ready tables
+  build_survey_datatable.py  Merges demographics/presurvey/postsurvey into
+                              one per-participant survey_data.csv
+  build_task_datatable.py    Merges each task round's two partner rows into
+                              one per-round task_data.csv
+  build_task_summary.py      Derives one payoff-structure summary row per
+                              task index from data/experiment.json
 ```
 
 ## Running locally
@@ -74,11 +81,11 @@ in-progress decisions, and uses it to advance the group through the task
 sequence.
 
 Each run of the server writes to a fixed set of output filenames, following
-the same `{type}_{arm}_{N}.csv` convention as `results/` (currently
-hardcoded to the `treatment`/`08` session near the top of `stratdyn.js`).
-Update those filenames for the session about to be run, and move the
-previous session's output files into `results/` before starting a new one,
-so they are not overwritten.
+the same `{type}_{arm}_{N}.csv` convention as `results/` (currently a
+placeholder, `arm`/`00`, near the top of `stratdyn.js`). Update those
+filenames for the session about to be run, and move the previous session's
+output files into `results/` before starting a new one, so they are not
+overwritten.
 
 ## Data
 
@@ -86,6 +93,32 @@ Collected survey and task data live under `results/`, organized by study
 arm (`control/`, `treatment/`) and then by session number. See
 [results/README.md](results/README.md) for a description of each file type
 and its columns.
+
+`analysis/build_survey_datatable.py` reads every `demographics_*.csv`,
+`presurvey_*.csv`, and `postsurvey_*.csv` under `results/` and merges them
+into one row per participant (`analysis/survey_data.csv`), adding `arm` and
+`session` columns. Run it with `python analysis/build_survey_datatable.py`
+after any change to `results/`.
+
+`analysis/build_task_datatable.py` reads every `task_*.csv` and merges each
+round's two per-partner rows into one row per round (`analysis/task_data.csv`),
+with each partner's task, design, strategy, collaboration belief, robot
+usage, and score in separate `_1`/`_2` columns. The four `Training Task`
+rounds every pair starts with, plus six "distraction" tasks that lacked the
+study's target payoff dynamic (`Task Idoha`, `Task Florida`, `Task Utah`,
+`Task Massachusetts`, `Task Montana`, `Task Mississippi`), are excluded,
+leaving 30 rounds per pair; `task_1`/`task_2` hold the task's index into
+`data/experiment.json` rather than its label. Run it with
+`python analysis/build_task_datatable.py` after any change to `results/`.
+See
+[results/README.md](results/README.md#task_csv--decision-task-rounds) for
+how the two raw rows per round are paired and scored.
+
+`analysis/build_task_summary.py` reads `data/experiment.json`'s `tasks`
+array and derives one payoff-structure summary row per task index
+(`analysis/task_summary.csv`), including each task's paired task index and
+its 6×5 difficulty/payoff-magnitude factorial grouping. See
+[analysis/README.md](analysis/README.md) for the full column reference.
 
 ## Known issues
 

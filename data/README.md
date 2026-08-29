@@ -32,3 +32,22 @@ One thing to note about this reconstruction:
 - **A subset of participants have task index `23` repeated and index `33`
   missing from their sequence.** This is a known data-entry error from when the assignment
   sequences were generated: index `33` was mistakenly entered as `23`. Task index `33` is a distraction task that should have been paired with itself.
+
+### Task structure (`analysis/build_task_summary.py`)
+
+`analysis/build_task_summary.py` reads `experiment.json`'s `tasks` array
+and derives one summary row per task index (0-39) — see
+[../analysis/README.md](../analysis/README.md) for the full column
+definitions.
+
+Its `paired_task_index` column (the task index a partner sees at the same
+round) is computed by scanning `assignments`/`partners` for what index
+actually accompanies each task index — except for indices 30-39
+(distraction tasks 30-35, training tasks 36-39), which are asserted to be
+self-paired (`paired_task_index == task_index`) rather than inferred. This
+is by design (both partners always see the identical task at these
+rounds), confirmed by unanimous 52/52 self-pairing in the data for every
+one of these indices *except* 33 — which, per the data-entry error noted
+above, is corrupted to always show paired with `23` instead. Trusting the
+raw data for index 33 specifically would get it wrong 100% of the time, so
+the whole 30-39 range is asserted rather than left to a majority vote.

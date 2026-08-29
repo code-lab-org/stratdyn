@@ -353,10 +353,10 @@ module.exports = function(io) {
                 );
 
                 fs.appendFile(
-                    preSurveyLogFile, 
-                    Date.now() + "," + username + "," + request["q1t2"] + "," + request["q2r3"] + 
-                    "," +  request["q3c1"] + "," +request["q4r2"] + "," + request["q5t1"] + "," + 
-                    "," + request["q6r1"] + "," + request["q7c3"] + "," + request["q8t3"]  + "," + 
+                    preSurveyLogFile,
+                    Date.now() + "," + username + "," + request["q1t2"] + "," + request["q2r3"] +
+                    "," +  request["q3c1"] + "," +request["q4r2"] + "," + request["q5t1"] + "," +
+                    request["q6r1"] + "," + request["q7c3"] + "," + request["q8t3"]  + "," +
                     request["q9c2"] +  "\r\n",
                     err => {
                         if (err) {

@@ -26,12 +26,46 @@ sequence.
 | `username` | Anonymized participant ID |
 | `partner` | Anonymized ID of the participant's partner for this round |
 | `task` | Task label (e.g. `Training Task 1`, `Task Washington`); definitions and payoffs are in `data/experiment.json` |
-| `design` | The design option chosen (`Design K`, `L`, `M`, or `Y`) |
+| `design` | The design option chosen (`Design K`, `L`, `M`, or `Y`). Recorded with a non-breaking space (U+00A0) between "Design" and the letter rather than a regular space — `stratdyn.js` strips that character from the copy it uses for scoring but not from the copy it logs, so the raw value never string-matches the plain-space labels used everywhere else (e.g. `data/experiment.json`). `analysis/build_task_datatable.py` normalizes this |
 | `strategy` | Self-reported strategy behind the choice: `collaborative` or `individual`. `Design Y` is the fixed-payoff (50/50) option associated with an individual strategy; `Design K`/`L`/`M` are the variable-payoff options associated with a collaborative strategy |
 | `collabBelief` | Participant's stated belief (0-100) that their partner will act collaboratively this round |
 | `usedRobot` | Whether the participant consulted the AI recommendation ("robot") before deciding |
 | `score` | Points earned this round. Computed from the participant's and partner's chosen designs: the upside payoff is awarded if both designs are in the collaborative set (K/L/M), the downside payoff if a design is in the collaborative set but the pairing doesn't fully align, and so on — see the `submit-decision` handler in `stratdyn.js` for the exact payoff matrix. `null` until the partner has also submitted a decision for the round |
 | `partnerScore` | Points earned by the partner this round, using the same logic |
+
+**Two rows per round, one per partner.** Each design-task round produces
+two rows sharing the same unordered `{username, partner}` pair, in
+submission order: the row submitted *first* always has `score` and
+`partnerScore` recorded as the literal string `null`, since neither
+partner's score can be computed until both have decided. The row submitted
+*second* carries the real values — its own `score` and its partner's
+`partnerScore` — computed from **both** partners' choices at that point.
+`analysis/build_task_datatable.py` merges each such pair of rows into one
+per-round record.
+
+Occasionally (8 rounds out of 1040 in this repo) *both* rows end up with
+`score`/`partnerScore` still `null`, because one partner's design failed to
+register that round (`design` is empty and `strategy` is the literal string
+`undefined` — see e.g. `user0014` in `task_control_01.csv`, round 4).
+When a design doesn't match any of that task's options, the server's
+scoring logic (`submit-decision` in `stratdyn.js`) never assigns a score to
+either partner. There's no way to recover a real score for these rounds;
+`analysis/build_task_datatable.py` leaves `score_1`/`score_2` blank for
+them rather than guessing.
+
+Every pair's first 4 rounds are `Training Task 1`-`4` (indices 36-39 in
+`data/experiment.json`'s `tasks` array) — a practice sequence run before the
+40 real tasks that make up the study design. `analysis/build_task_datatable.py`
+excludes these from its output entirely and renumbers `round` to count only
+the remaining real tasks.
+
+`analysis/build_task_datatable.py` also excludes six "distraction" tasks —
+`Task Idoha`, `Task Florida`, `Task Utah`, `Task Massachusetts`,
+`Task  Montana`, `Task  Mississippi` (indices 30-35) — which didn't have the
+payoff dynamic the study is actually about, and replaces `task_1`/`task_2`
+with the task's index into `data/experiment.json`'s `tasks` array instead
+of its label, leaving 30 possible task indices (0-29) and 30 rounds per
+pair (780 rows total) in `analysis/task_data.csv`.
 
 ## `presurvey_*.csv` and `postsurvey_*.csv`
 
