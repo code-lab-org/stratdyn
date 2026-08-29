@@ -156,8 +156,20 @@ re-fits both models after excluding the 2 treatment pairs that never used
 the robot (a post-hoc, non-causal sensitivity check, not a replacement for
 the main results) — the difficulty-mismatch interaction gets substantially
 stronger, consistent with those pairs getting none of the tool's buffering
-effect. See [analysis/README.md](analysis/README.md) for the actual
-results.
+effect. The same round-level modeling is then repeated for coordination
+failure specifically: task difficulty mismatch significantly raises
+coordination failure in control, and the treatment's buffering interaction
+— only a trend in the full sample — reaches significance after excluding
+the same 2 non-adopter pairs, a fourth independent confirmation of the
+buffering pattern found elsewhere in this analysis. Finally, all three
+outcomes are compared simultaneously with a multinomial logit
+(`NominalGEE`, cluster-robust on pair), which separates two distinct
+mechanisms: overall task difficulty drives pairs toward mutual
+independence, while difficulty *mismatch* between partners specifically
+drives coordination failure — and the treatment's buffering effect against
+mismatch turns out to act specifically on coordination failure, reaching
+significance in the full sample without needing the non-adopter exclusion.
+See [analysis/README.md](analysis/README.md) for the actual results.
 
 `analysis/efficiency_analysis.ipynb` runs the same style of analysis on a
 continuous efficiency measure (`E`, each round's realized payoff relative

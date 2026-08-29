@@ -171,6 +171,50 @@ are dropped before classifying.
   randomly assigned, so a properly-adjusted "effect among compliers" would
   need an instrumental-variable / CACE approach; reported as a robustness
   signal alongside the main results, not a replacement for them.
+- **Coordination failure**, modeled the same way as `successful_collaboration`
+  above (basic `arm`-only model, then with task difficulty, then the
+  non-adopter robustness check), since the pair-level test only found a
+  trend (Mann-Whitney p ≈ 0.07) and round-level covariates hadn't been
+  tried for this outcome specifically. The same VB anti-conservatism shows
+  up for `arm` (mixed-model SE a third of GEE's); GEE finds `arm` alone
+  non-significant (p = 0.17), matching the pair-level result.
+  `max_difficulty_c` is **not** a significant predictor here (GEE p = 0.89)
+  — unlike for successful collaboration — suggesting harder tasks reduce
+  success mainly by pushing pairs toward *mutual* independence rather than
+  *asymmetric* breakdown. `diff_difficulty_c` (the control-arm slope) is
+  significant and positive (GEE p < 0.001): difficulty mismatch raises
+  coordination failure in control, the direct mirror of its effect on
+  success. `arm:diff_difficulty_c` is only a trend in the full sample (GEE
+  p = 0.095) but becomes significant after excluding the 2 non-adopter
+  pairs (GEE p = 0.007), the same pattern and explanation as the primary
+  outcome's robustness check — a fourth independent confirmation (after
+  `successful_collaboration`, `efficiency_analysis.ipynb`, and
+  `belief_analysis.ipynb`) of the treatment specifically buffering against
+  difficulty-mismatch harm, now shown to operate (at least in part) through
+  suppressing coordination failure rather than only boosting success.
+- **Joint multinomial model (all three outcomes at once)**: rather than
+  binarizing the outcome twice, `statsmodels`' `NominalGEE` fits a
+  multinomial logit with cluster-robust SEs on `pair_id` (the same GEE
+  machinery trusted throughout this notebook), comparing mutual
+  independence and coordination failure both against successful
+  collaboration in one model. A basic `arm`-only version reproduces the
+  separate binomial GEEs' conclusions (neither contrast significant). With
+  task difficulty added, the joint model separates two mechanisms the
+  one-at-a-time models could only imply: `max_difficulty_c` predicts
+  mutual independence vs. success (p < 0.001) but not coordination failure
+  vs. success (p = 0.48) — harder tasks push toward *both* partners
+  going individual, not asymmetric breakdown — while `diff_difficulty_c`
+  shows the reverse split, predicting coordination failure (p < 0.001) but
+  not mutual independence (p = 0.85). The `arm:diff_difficulty_c` buffering
+  interaction is significant for coordination failure vs. success (p =
+  0.035) **in the full 14-pair sample**, without needing the non-adopter
+  exclusion the separate binomial GEE required — the joint fit is more
+  statistically efficient, sharpening the same effect found five other ways
+  in this analysis. A true mixed-effects (random-intercept) multinomial
+  model isn't available in `statsmodels` and wasn't pursued — given the VB
+  mixed model's demonstrated unreliability for `arm` earlier in this
+  notebook, GEE's marginal, cluster-robust approach is the validated choice
+  for this clustering structure anyway.
 
 ## `efficiency_analysis.ipynb`
 
