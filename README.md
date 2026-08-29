@@ -218,7 +218,13 @@ usage is highly heterogeneous across users, declines steadily over the 30
 rounds (a novelty/trust-calibration pattern), and a properly-clustered
 model finds that decline is real but a hypothesized "uses the robot more
 right after a failed round" effect is directionally present but not
-statistically confirmed with only 14 pairs.
+statistically confirmed with only 14 pairs. It also asks the reverse
+question — does robot use relate to that round's own outcome, compared
+across all three outcomes at once with a multinomial GEE — and finds a
+naive association with more coordination failure that turns out, once
+decomposed into between-pair and within-pair components, to be almost
+entirely a between-pair pattern (struggling pairs use the tool more) with
+no evidence the tool itself is harmful in the specific round it's used.
 
 `analysis/belief_manipulation_analysis.ipynb` looks for evidence, within
 the treatment arm only, of participants exploiting the belief-sharing

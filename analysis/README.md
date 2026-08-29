@@ -414,6 +414,29 @@ users, 14 pairs) — from `task_data.csv`.
   once properly clustered (GEE p = 0.11) — directionally consistent, but
   underpowered to confirm with only 14 pairs. A real open question, not a
   settled result.
+- **Does robot use relate to that round's outcome?** The reverse question
+  from the above, and temporally valid the same way `collabBelief`→strategy
+  is in `belief_analysis.ipynb`: `usedRobot` for a round is set before that
+  round's strategy is chosen. A naive joint multinomial GEE
+  (`either_used_robot ~ outcome`, all three outcomes at once, cluster-robust
+  on pair) finds robot use associated with much higher coordination failure
+  (16.9% vs. 4.5%, GEE p = 0.015) but not mutual independence (p = 0.45) —
+  but since robot use isn't randomly assigned and per-pair usage rates
+  range 0-100%, this needs a confounding check before being taken at face
+  value. Decomposing `either_used_robot` into `robot_use_between` (that
+  pair's overall usage rate) and `robot_use_within` (this round's deviation
+  from the pair's own rate) shows the effect is almost entirely
+  **between-pair**: `robot_use_within` is not significant for either
+  outcome (p = 0.20, p = 0.23), while `robot_use_between` is only a trend
+  for coordination failure (p = 0.054) with just 14 clusters. Robot use
+  rate is also flat across both task-difficulty measures, ruling out
+  difficulty as a same-round confound. Combined with pair identities
+  already found elsewhere (the two heaviest-use pairs are two of the three
+  lowest-success pairs, but so is one of the two zero-use pairs), the most
+  plausible reading is that struggling pairs reach for the tool more
+  *because* they're struggling (reverse causation / compensatory use), not
+  that the tool causes worse outcomes — and there's no evidence the tool is
+  harmful in the specific round it's used.
 
 ## `belief_manipulation_analysis.ipynb`
 
