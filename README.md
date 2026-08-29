@@ -64,6 +64,14 @@ analysis/               Scripts for turning results/ into analysis-ready tables
                               one per-round task_data.csv
   build_task_summary.py      Derives one payoff-structure summary row per
                               task index from data/experiment.json
+  descriptive_statistics.ipynb  Demographic descriptive statistics
+  outcome_analysis.ipynb        Task-round outcome frequency by arm
+  efficiency_analysis.ipynb     Numeric efficiency counterpart to the above
+  belief_analysis.ipynb         Stated collaboration-belief counterpart
+  risk_dominance_analysis.ipynb Success rate vs. risk dominance, by arm
+  robot_use_analysis.ipynb      Robot use over time and after failed rounds
+  belief_manipulation_analysis.ipynb  Flags participants whose stated
+                                       belief and strategy were inconsistent
 ```
 
 ## Running locally
@@ -119,6 +127,105 @@ array and derives one payoff-structure summary row per task index
 (`analysis/task_summary.csv`), including each task's paired task index and
 its 6×5 difficulty/payoff-magnitude factorial grouping. See
 [analysis/README.md](analysis/README.md) for the full column reference.
+
+## Analysis
+
+`analysis/descriptive_statistics.ipynb` covers demographic descriptive
+statistics (gender counts, min/mean/max age, English proficiency, and
+social closeness) by study arm and overall, built on
+`analysis/survey_data.csv`.
+
+`analysis/outcome_analysis.ipynb` covers task-round outcomes, built on
+`analysis/task_data.csv`. Each round is classified as successful
+collaboration (`C`/`C`), mutual independence (`I`/`I`), or coordination
+failure (`C`/`I`), after dropping rounds with an undefined strategy.
+Reports round-level frequency by arm, then — accounting for rounds within
+a pair not being independent — aggregates to one outcome-rate observation
+per pair (12 control, 14 treatment) and compares arms with a Welch's
+t-test, Mann-Whitney U test, and Cohen's *d*. Also fits a round-level mixed
+logistic model (random intercept per pair) as a basic starting point for
+using all 778 rounds directly, and cross-checks it against GEE — the two
+disagree sharply on significance for the `arm` effect, which the notebook
+resolves in GEE's favor (see [analysis/README.md](analysis/README.md) for
+why). Finally, adds each round's task difficulty (from
+`analysis/task_summary.csv`) as covariates and finds a significant
+`arm × difficulty-mismatch` interaction: the treatment appears to buffer
+against the harm of partners facing mismatched task difficulty, rather
+than uniformly raising collaboration. As a robustness check, also
+re-fits both models after excluding the 2 treatment pairs that never used
+the robot (a post-hoc, non-causal sensitivity check, not a replacement for
+the main results) — the difficulty-mismatch interaction gets substantially
+stronger, consistent with those pairs getting none of the tool's buffering
+effect. See [analysis/README.md](analysis/README.md) for the actual
+results.
+
+`analysis/efficiency_analysis.ipynb` runs the same style of analysis on a
+continuous efficiency measure (`E`, each round's realized payoff relative
+to each partner's own best-possible payoff) instead of the 3-category
+outcome, and independently reaches the same conclusions — including using
+a proper (non-variational-Bayes) linear mixed model, which agrees closely
+with GEE on every `arm`/difficulty term, confirming the earlier VB
+discrepancy was specific to the binary-outcome model. Also checks a pair's
+average pre-task social closeness (positive but inconclusive trend — the
+two models disagree on significance, unlike everywhere else in this
+notebook) and a `log_round` trend (no detectable effect, dropped).
+
+`analysis/belief_analysis.ipynb` runs a third outcome analysis on
+`collabBelief` (each partner's own stated belief their partner will
+collaborate) — reshaped to one row per participant per round, since it's
+an individual rather than joint measure. `collabBelief` is submitted
+*before* the robot is even accessible each round, and the robot's info
+modal shows a participant's belief to their partner — so the clearest
+`arm` effect anywhere in this analysis (significant at every level) can't
+be read as "the tool changes what people believe" via a within-round
+mechanism; it's at least as plausibly a reporting/incentive effect specific
+to the belief-sharing mechanism as a genuine shift in private forecasts.
+See [analysis/README.md](analysis/README.md) for the full caveat. It also
+tests whether belief predicts a participant's own strategy choice that
+same round (temporally valid, since belief is submitted before the design
+choice): a strong, robust predictor, while `arm` itself adds nothing once
+belief and difficulty are controlled — except for an `arm:diff_difficulty`
+interaction, a third independent confirmation of the buffering pattern
+found for the categorical outcome and for efficiency. Finally, since a
+participant's belief can only reach their partner via the robot (a
+treatment-only mechanism), it tests `partner_belief` interacted with
+`arm`: not significant in control (no sharing channel exists), significant
+in treatment (effect size comparable to a participant's own belief) — a
+clean internal-consistency check on the belief-sharing mechanism.
+
+`analysis/risk_dominance_analysis.ipynb` plots all three outcome rates
+(successful collaboration, mutual independence, coordination failure)
+against a game-theoretic risk-dominance measure `R` (derived from each
+task's payoffs, binned to average out payoff-rounding noise, with 95% CIs),
+by arm — visualizing the same pattern found above: both arms' collaboration
+rate declines as risk dominance increases, but treatment declines less
+steeply than control.
+
+`analysis/robot_use_analysis.ipynb` explores `usedRobot` (treatment-only):
+usage is highly heterogeneous across users, declines steadily over the 30
+rounds (a novelty/trust-calibration pattern), and a properly-clustered
+model finds that decline is real but a hypothesized "uses the robot more
+right after a failed round" effect is directionally present but not
+statistically confirmed with only 14 pairs.
+
+`analysis/belief_manipulation_analysis.ipynb` looks for evidence, within
+the treatment arm only, of participants exploiting the belief-sharing
+mechanism found in `belief_analysis.ipynb`: reporting a `collabBelief`
+high enough to imply they'd collaborate, then choosing `I` anyway — viable
+because `V_Y` doesn't depend on the partner's choice, so it's never costly
+to the person doing it. Uses each task's risk-dominance threshold `u` (from
+`risk_dominance_analysis.ipynb`) as a natural, non-arbitrary cutoff for
+"belief implied collaborating was rational," then flags individual
+participants whose rate of choosing `I` despite that implication is
+significantly above the group baseline (exact binomial test, FDR-corrected
+across 28 participants). Three participants are flagged; the behavior is
+otherwise rare (18 of 28 participants show none at all). Notably, the three
+flagged participants' pairs were independently flagged in two earlier
+notebooks using unrelated data — as the non-adopter pair that behaved like
+control despite treatment assignment, and as the two heaviest-robot-use,
+lowest-success pairs — a convergence across three separate measures that is
+stronger evidence than any one result alone. See
+[analysis/README.md](analysis/README.md) for the full results and caveats.
 
 ## Known issues
 
