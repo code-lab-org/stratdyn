@@ -2,8 +2,9 @@
 
 Reads every demographics_*.csv, presurvey_*.csv, and postsurvey_*.csv file
 under results/{control,treatment}/, joins them on username (one row per
-participant), adds `arm` and `session` columns, and writes the result to
-survey_data.csv in this directory.
+participant), adds `arm` and `session` columns, renames each survey column
+to something descriptive (see descriptive_column), and writes the result
+to survey_data.csv in this directory.
 
 Usage: python build_survey_datatable.py
 """
@@ -50,16 +51,47 @@ def read_survey_rows(path):
                 yield row
 
 
-def prefixed_column(survey_type, column):
-    """presurvey and postsurvey happen to share two raw column names
-    (q4r2, q5t1) -- prefix every survey-specific column by its survey type
-    so a merge can never silently overwrite one survey's answer with
-    another's. demographics columns are already uniquely named."""
+CONSTRUCT_NAMES = {"t": "trust", "r": "risk", "c": "control"}
+SURVEY_ITEM_RE = re.compile(r"^q\d(?P<construct>[trc])(?P<item>\d)$")
+
+# See results/README.md for the source of each of these names/caveats.
+# q4/q5 are a known bug (public/index.js submitted the q3 input for all
+# three fields) that duplicates stem_education_years rather than capturing
+# professional experience / native language as intended -- mapped to None
+# to drop them entirely rather than keep a column that just repeats
+# stem_education_years under a different name.
+DEMOGRAPHICS_COLUMN_NAMES = {
+    "demographics-survey-q1": "gender",
+    "demographics-survey-q2": "age",
+    "demographics-survey-q3": "stem_education_years",
+    "demographics-survey-q4": None,
+    "demographics-survey-q5": None,
+    "demographics-survey-q63": "english_proficiency",
+    "demographics-survey-q7": "social_closeness",
+}
+
+
+def descriptive_column(survey_type, column):
+    """Rename a raw survey column to something descriptive, or return None
+    if the column should be dropped entirely (see DEMOGRAPHICS_COLUMN_NAMES).
+
+    presurvey/postsurvey columns share the same 9 underlying constructs
+    (t=Trust, r=Risk, c=Control, each with 3 items) but in a different
+    on-screen order with different raw names per survey (e.g. presurvey's
+    q1t2 and postsurvey's q7t2 are both "Trust item 2") -- renamed to
+    <construct>_<item> and prefixed by survey type, both to normalize this
+    and because presurvey/postsurvey happen to share two raw names (q4r2,
+    q5t1) that a merge could otherwise silently overwrite.
+    """
     if column == "timestamp":
-        return f"{survey_type}_timestamp"
+        return None
     if survey_type == "demographics":
-        return column
-    return f"{survey_type}_{column}"
+        return DEMOGRAPHICS_COLUMN_NAMES[column]
+    match = SURVEY_ITEM_RE.match(column)
+    if not match:
+        raise ValueError(f"unrecognized {survey_type} column: {column!r}")
+    construct = CONSTRUCT_NAMES[match.group("construct")]
+    return f"{survey_type}_{construct}_{match.group('item')}"
 
 
 def main():
@@ -83,7 +115,9 @@ def main():
             for column, value in row.items():
                 if column == "username":
                     continue
-                key = prefixed_column(survey_type, column)
+                key = descriptive_column(survey_type, column)
+                if key is None:
+                    continue
                 if key not in columns:
                     columns.append(key)
                 participant[key] = value

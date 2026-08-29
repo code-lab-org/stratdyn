@@ -10,14 +10,23 @@ scratch, so re-run them after any change to `results/` or `experiment.json`.
 One row per participant (52 rows), merging `demographics_*.csv`,
 `presurvey_*.csv`, and `postsurvey_*.csv`.
 
-| Column | Description |
-|---|---|
-| `username` | Anonymized participant ID (primary key) |
-| `arm` | `control` or `treatment` |
-| `session` | Two-digit session number within `arm` |
-| `demographics_timestamp`, `demographics-survey-q1` ... `q7`, `q63` | See [../results/README.md](../results/README.md#demographics_csv) |
-| `presurvey_timestamp`, `presurvey_q1t2` ... `presurvey_q9c2` | Pre-survey items, prefixed to avoid colliding with postsurvey's `q4r2`/`q5t1` |
-| `postsurvey_timestamp`, `postsurvey_q1c2` ... `postsurvey_q9r3` | Post-survey items, same prefixing |
+Columns are renamed from their raw `results/*.csv` names to something
+descriptive (see `descriptive_column` in the script); raw names are listed
+below for cross-reference with [../results/README.md](../results/README.md).
+
+| Column | Raw name(s) | Description |
+|---|---|---|
+| `username` | `username` | Anonymized participant ID (primary key) |
+| `arm` | *(derived from filename)* | `control` or `treatment` |
+| `session` | *(derived from filename)* | Two-digit session number within `arm` |
+| `gender` | `demographics-survey-q1` | `Female` / `Male` (no other values in this dataset) |
+| `age` | `demographics-survey-q2` | In years |
+| `stem_education_years` | `demographics-survey-q3` | Years of college-level STEM education |
+| *(dropped)* | `demographics-survey-q4`, `q5` | Intended to capture professional experience / native language, but a client-side bug duplicated `stem_education_years` into both instead — dropped entirely rather than kept as columns that just repeat `stem_education_years`; see [../results/README.md](../results/README.md#demographics_csv) for the raw data |
+| `english_proficiency` | `demographics-survey-q63` | `Fluent/Native` / `High` / `Medium-High` / `Medium-Low` / `Low` |
+| `social_closeness` | `demographics-survey-q7` | 1 (first-time meeting) to 5 (very close) familiarity with one's partner |
+| `presurvey_trust_1..3`, `presurvey_risk_1..3`, `presurvey_control_1..3` | `q1t2` ... `q9c2` | Pre-survey items, renamed from their raw `q<n><construct><item>` codes to `<construct>_<item>` (`t`=trust, `r`=risk, `c`=control) |
+| `postsurvey_trust_1..3`, `postsurvey_risk_1..3`, `postsurvey_control_1..3` | `q1c2` ... `q9r3` | Post-survey items, same renaming. Both surveys carry the same 9 constructs in a different on-screen order — `presurvey_trust_2` and `postsurvey_trust_2` are the same construct/item, asked before and after the task sequence |
 
 A duplicate demographics submission (`user0038`) is deduplicated (first
 submission kept). See [../results/README.md](../results/README.md) for
@@ -34,8 +43,8 @@ merging each round's two per-partner rows from `task_*.csv`.
 | `round` | 1-30, sequential within this pair after exclusions (see below) |
 | `username_1`, `username_2` | The pair's two participants; `username_1` is always the alphabetically-lower of the two, consistently across all of that pair's rounds |
 | `task_1`, `task_2` | Each partner's task **index** into `data/experiment.json`'s `tasks` array (not its label) |
-| `design_1`, `design_2` | Each partner's chosen design (`Design K`/`L`/`M`/`Y`) |
-| `strategy_1`, `strategy_2` | Each partner's self-reported strategy (`collaborative`/`individual`, or `undefined` if their submission failed to register that round) |
+| `design_1`, `design_2` | Each partner's chosen design, shortened to just its letter (`K`/`L`/`M`/`Y`, from raw `Design K`/`L`/`M`/`Y`) |
+| `strategy_1`, `strategy_2` | Each partner's self-reported strategy, shortened to `C` (collaborative) or `I` (individual); left as the literal string `undefined` if their submission failed to register that round |
 | `collabBelief_1`, `collabBelief_2` | Each partner's stated belief (0-100) that the other will act collaboratively |
 | `usedRobot_1`, `usedRobot_2` | Whether each partner consulted the AI recommendation |
 | `score_1`, `score_2` | Each partner's points earned. Blank for 4 rounds where a design failed to register for one partner, breaking the scoring match for both (see [../results/README.md](../results/README.md#task_csv--decision-task-rounds)) |

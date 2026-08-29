@@ -77,6 +77,28 @@ def clean_value(value):
     return value.replace("\xa0", " ").strip()
 
 
+STRATEGY_ABBREVIATIONS = {"collaborative": "C", "individual": "I"}
+DESIGN_LABEL_RE = re.compile(r"^Design (\S+)$")
+
+
+def abbreviate_strategy(value):
+    """collaborative -> C, individual -> I. Left as-is otherwise (e.g. the
+    literal string "undefined" logged when a submission failed to register
+    -- see results/README.md)."""
+    return STRATEGY_ABBREVIATIONS.get(value, value)
+
+
+def abbreviate_design(value):
+    """"Design K" -> "K" (also L, M, Y). Left as-is for the empty string
+    logged when a submission failed to register."""
+    if not value:
+        return value
+    match = DESIGN_LABEL_RE.match(value)
+    if not match:
+        raise ValueError(f"unrecognized design value: {value!r}")
+    return match.group(1)
+
+
 def read_task_rows(path):
     """Read a task_*.csv, cleaning header names and values (the server's log
     writer leaves stray spaces around several fields, e.g. the header has
@@ -146,10 +168,10 @@ def build_rounds(arm, session, path, label_to_index):
                 "username_2": username_2,
                 "task_1": label_to_index[task_label_1],
                 "task_2": label_to_index[task_label_2],
-                "design_1": by_user[username_1]["design"],
-                "design_2": by_user[username_2]["design"],
-                "strategy_1": by_user[username_1]["strategy"],
-                "strategy_2": by_user[username_2]["strategy"],
+                "design_1": abbreviate_design(by_user[username_1]["design"]),
+                "design_2": abbreviate_design(by_user[username_2]["design"]),
+                "strategy_1": abbreviate_strategy(by_user[username_1]["strategy"]),
+                "strategy_2": abbreviate_strategy(by_user[username_2]["strategy"]),
                 "collabBelief_1": by_user[username_1]["collabBelief"],
                 "collabBelief_2": by_user[username_2]["collabBelief"],
                 "usedRobot_1": by_user[username_1]["usedRobot"],
