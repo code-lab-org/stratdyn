@@ -406,15 +406,33 @@ outcome and for efficiency — now shown to hold even at the level of
 individual strategy choice, after controlling for the person's own stated
 belief, so it isn't just an artifact of belief itself differing by arm.
 
+**Extending the model: does payoff magnitude matter too?** `payoff_magnitude`
+(1-5) scales a task's payoffs while holding its risk ratio `u` nearly fixed
+within a `task_difficulty` tier — so it isolates absolute stake size from
+relative risk, testing a risk-aversion hypothesis: does a bigger-stakes
+version of the *same* relative gamble make participants more cautious?
+Adding `own_magnitude_c` (the participant's own task's `payoff_magnitude`)
+to the model above: it's significant and negative (GEE coef -0.104,
+p = 0.001; mixed model corroborates) — bigger stakes reduce the odds of
+choosing `C`, holding relative risk fixed. `max_difficulty_c:own_magnitude_c`
+is also significant (GEE p = 0.002): the penalty compounds with difficulty
+rather than being constant — barely detectable at an easy task, substantial
+at a hard one. `arm:own_magnitude_c` was tested and dropped (p = 0.326) —
+the treatment doesn't change this relationship, unlike the difficulty-
+mismatch buffering effect. All three magnitude terms hold up unchanged when
+`partner_belief` is added below, and none of the difficulty/belief results
+above are disturbed by adding magnitude.
+
 **Does the partner's belief predict a participant's own choice?** A
 participant's belief can only reach their partner via the robot's info
 modal (`"Partner Belief = " + partnerCollabBelief`), a treatment-only
 mechanism — so `partner_belief_c` is interacted with `arm` rather than
 added as a main effect, expecting it to matter only where that channel
 exists. `chose_C ~ collabBelief_c + partner_belief_c * arm +
-max_difficulty_c + diff_difficulty_c + arm:diff_difficulty_c` confirms
-exactly that: `partner_belief_c` alone (the control-arm slope) is not
-significant (GEE p = 0.152, as expected with no sharing mechanism), while
+max_difficulty_c + diff_difficulty_c + arm:diff_difficulty_c +
+own_magnitude_c + max_difficulty_c:own_magnitude_c` confirms exactly that:
+`partner_belief_c` alone (the control-arm slope) is not significant (GEE
+p = 0.144, as expected with no sharing mechanism), while
 `partner_belief_c:arm` is significant (GEE p = 0.004, mixed model
 corroborates) — an effective treatment-arm slope (≈ 0.043) comparable in
 size to a participant's own belief. A clean internal-consistency check:

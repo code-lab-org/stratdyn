@@ -215,12 +215,17 @@ same round (temporally valid, since belief is submitted before the design
 choice): a strong, robust predictor, while `arm` itself adds nothing once
 belief and difficulty are controlled — except for an `arm:diff_difficulty`
 interaction, a third independent confirmation of the buffering pattern
-found for the categorical outcome and for efficiency. Finally, since a
-participant's belief can only reach their partner via the robot (a
-treatment-only mechanism), it tests `partner_belief` interacted with
-`arm`: not significant in control (no sharing channel exists), significant
-in treatment (effect size comparable to a participant's own belief) — a
-clean internal-consistency check on the belief-sharing mechanism.
+found for the categorical outcome and for efficiency. It also extends the
+model with `payoff_magnitude` — which scales a task's stakes while holding
+its relative risk fixed — and finds a real, independent risk-aversion
+effect: bigger stakes reduce collaboration even at the same relative risk,
+an effect that compounds with task difficulty and isn't touched by `arm`.
+Finally, since a participant's belief can only reach their partner via the
+robot (a treatment-only mechanism), it tests `partner_belief` interacted
+with `arm`: not significant in control (no sharing channel exists),
+significant in treatment (effect size comparable to a participant's own
+belief) — a clean internal-consistency check on the belief-sharing
+mechanism, unaffected by adding the magnitude terms.
 
 `analysis/risk_dominance_analysis.ipynb` plots all three outcome rates
 (successful collaboration, mutual independence, coordination failure)
