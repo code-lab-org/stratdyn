@@ -215,6 +215,76 @@ are dropped before classifying.
   mixed model's demonstrated unreliability for `arm` earlier in this
   notebook, GEE's marginal, cluster-robust approach is the validated choice
   for this clustering structure anyway.
+- **Sensitivity check: excluding task index 19.** `data/README.md`
+  documents a payoff anomaly in task 19 — its highest-upside design has a
+  downside identical to task 14's rather than one scaled to its own
+  (higher) difficulty tier, most likely a copy-paste error in the original
+  task table. Task 19 is always paired with task 5, so its 52 rounds sit
+  at a fixed `diff_difficulty = 2`, `max_difficulty = 4`. Refitting the
+  joint model without them leaves the mutual-independence/coordination-
+  failure mechanistic split essentially unchanged, but the
+  `arm:diff_difficulty_c` interaction for coordination failure drops from
+  significant (coef -0.345, p = 0.035) to a trend (coef -0.324, p = 0.070)
+  — the point estimate barely moves, but the SE grows more than the
+  6.7%-smaller sample explains, so this specific result is more sensitive
+  to the anomaly than to sample size. Every other conclusion in the
+  section is robust to the exclusion.
+- **Sensitivity check: recoding task index 19 to its actual difficulty
+  tier.** Task 19's `u_A` matches the tier-3 block almost exactly, and its
+  participants' `chose_C` rate is statistically indistinguishable from
+  that block's — so rather than dropping its rounds, this refits the joint
+  model with task 19 recoded to `task_difficulty = 3`, correcting
+  `max_difficulty`/`diff_difficulty` for every round it appears in.
+  Unlike exclusion, this *strengthens* the buffering interaction: coef
+  -0.372, p = 0.012 for coordination failure vs. success (vs. -0.345,
+  p = 0.035 in the mislabeled full sample, and -0.324, p = 0.070 when
+  excluded); the mutual-independence contrast moves from p = 0.125 to a
+  trend at p = 0.071. Every other coefficient is essentially unchanged.
+  The direction makes sense: task 19's rounds aren't noise to discard,
+  they're mismeasured — dropping them removes real information along with
+  the error, while correcting the label fixes the measurement and lets the
+  true relationship come through more clearly.
+
+## `outcome_analysis_selected_u.ipynb`
+
+A leaner companion to `outcome_analysis.ipynb`'s joint multinomial section
+only, replacing `max_difficulty`/`diff_difficulty` with **`max_u`/`diff_u`**
+— built from the risk threshold `u` of the *specific collaborative design
+each participant actually selected*, rather than a coarse 1-6 difficulty
+tier. Ranks each task's `K`/`L`/`M` designs by upside (reading
+`data/experiment.json` directly, replicating `build_task_summary.py`'s
+logic, since which raw label is `A`/`B`/`C` varies per task) and looks up
+that design's `u`/`u_B`/`u_C`; for `Y` (individual) choices, which have no
+collaborative design to reference, falls back to the task's own canonical
+`u_A`.
+
+- **Why it matters**: only 71.2% of collaborative choices actually go to
+  design `A` — the other 28.8% (`B` or `C`) is real variation
+  `task_difficulty` (or a fixed `u_A`) misses entirely. As a side benefit,
+  this construction fixes the task-19 payoff anomaly automatically, with
+  no manual recoding — task 19's design `A` already carries its true,
+  anomalous `u` (0.7024) since it's computed from that task's own real
+  payoffs.
+- **A caveat this introduces**: `u_selected` is exogenous for `Y` choices
+  (task-fixed) but not for `C` choices (which design a participant picks
+  among `A`/`B`/`C` is itself part of their own decision) — so `max_u`/
+  `diff_u` are partly a revealed-choice measure, not a purely pre-assigned
+  covariate the way `arm` or `task_difficulty` are elsewhere in this
+  analysis.
+- **Results**: the same mechanistic split found with `task_difficulty`
+  replicates — `max_u_c` predicts mutual independence vs. success
+  (p < 0.001) but not coordination failure (p = 0.293); `diff_u_c` shows
+  the reverse (coordination failure p < 0.001, mutual independence
+  p = 0.931). The buffering interaction `arm:diff_u_c` is significant for
+  coordination failure (coef -5.80, p = 0.028) directly in the full
+  14-pair sample, with no task-19 correction needed — comparable to (a
+  little weaker than) the manual-recode version in `outcome_analysis.ipynb`
+  (p = 0.012), and better-identified than either the original mislabeled
+  version (p = 0.035) or the task-19-exclusion version (p = 0.070). The
+  qualitative agreement between this revealed-choice measure and the
+  purely exogenous `task_difficulty` version is reassuring against the
+  endogeneity caveat above — it suggests this refines the same real
+  relationship rather than surfacing a different, self-selected one.
 
 ## `efficiency_analysis.ipynb`
 
@@ -369,6 +439,11 @@ tasks, which lack the collaborative-dilemma payoff structure the formula
 assumes), and is nearly constant across `payoff_magnitude` within each
 `task_difficulty` tier — confirming the reference-design assumption that
 the non-`A` collaborative designs were held similar, subject to rounding.
+`u_B` and `u_C` (the same formula applied to designs `B` and `C`) are
+computed and shown alongside `u` for direct comparison — they track `u`
+within a few thousandths at every task, confirming the three collaborative
+designs share essentially the same risk structure rather than merely the
+same difficulty tier. `R` below still uses only `u` (design `A`).
 
 Since `u` is effectively a function of `task_difficulty` alone, `R` is
 mostly determined by the unordered pair of difficulty tiers involved (15

@@ -72,6 +72,9 @@ analysis/               Scripts for turning results/ into analysis-ready tables
   robot_use_analysis.ipynb      Robot use over time and after failed rounds
   belief_manipulation_analysis.ipynb  Flags participants whose stated
                                        belief and strategy were inconsistent
+  outcome_analysis_selected_u.ipynb   Joint outcome model using each
+                                       participant's actually-selected
+                                       design's risk threshold
 ```
 
 ## Running locally
@@ -169,7 +172,21 @@ independence, while difficulty *mismatch* between partners specifically
 drives coordination failure — and the treatment's buffering effect against
 mismatch turns out to act specifically on coordination failure, reaching
 significance in the full sample without needing the non-adopter exclusion.
-See [analysis/README.md](analysis/README.md) for the actual results.
+Also documents (and sensitivity-checks two fixes for) a payoff anomaly in
+task index 19, which its own real payoffs reveal to be mislabeled — see
+[analysis/README.md](analysis/README.md) for the full results.
+
+`analysis/outcome_analysis_selected_u.ipynb` is a leaner companion
+covering only the joint multinomial model, replacing task-assigned
+difficulty with `max_u`/`diff_u` — the risk threshold of the specific
+design each participant actually selected (falling back to the task's own
+threshold for individual choices). This captures real variation task
+difficulty misses (29% of collaborative choices don't pick the
+highest-upside design) and fixes the task-19 anomaly automatically with no
+manual correction, while reproducing the same mechanistic split and
+buffering interaction found with task difficulty — reassurance that the
+earlier results reflect a real relationship rather than an artifact of the
+coarser covariate.
 
 `analysis/efficiency_analysis.ipynb` runs the same style of analysis on a
 continuous efficiency measure (`E`, each round's realized payoff relative
@@ -258,3 +275,9 @@ stronger evidence than any one result alone. See
   `23`) when the assignment sequences were generated. This is reflected in
   both the raw `task_*.csv` files and the reconstructed `assignments` in
   `data/experiment.json` — see [data/README.md](data/README.md) for details.
+- Task index 19's highest-upside design has a downside payoff (-68) that
+  matches task index 14's instead of scaling up for its own (higher)
+  difficulty tier, most likely a copy-paste error in the original task
+  payoff table. This makes that one task's computed risk-dominance
+  threshold `u` (in `analysis/risk_dominance_analysis.ipynb`) an outlier
+  relative to its tier — see [data/README.md](data/README.md) for details.

@@ -51,3 +51,25 @@ one of these indices *except* 33 — which, per the data-entry error noted
 above, is corrupted to always show paired with `23` instead. Trusting the
 raw data for index 33 specifically would get it wrong 100% of the time, so
 the whole 30-39 range is asserted rather than left to a majority vote.
+
+- **Task index 19 ("Task Illinois")'s highest-upside design has a downside
+  payoff that doesn't fit its difficulty tier.** `task_difficulty` is
+  assigned purely from `task_index` (`(task_index // 5) + 1`), while which
+  design becomes `A`/`B`/`C` is chosen per-task by upside, independent of
+  index. Task 19 sits in tier 4, and its designs' downsides at the
+  `payoff_magnitude = 1` level should scale up from tier 3's -68 toward
+  tier 5's -150, the same way every other tier does — instead, its
+  highest-upside design (`Design M`, upside 100) has a downside of exactly
+  **-68**, identical to task index 14 ("Task Texas", tier 3)'s
+  highest-upside design, rather than a harsher value consistent with tier
+  4. This looks like a copy-paste error in the original task payoff table,
+  not a data-collection issue like the ones above. Effect: in
+  `analysis/risk_dominance_analysis.ipynb`, task 19's computed `u` (design
+  `A`'s risk threshold) comes out to 0.702 instead of the ~0.75 every other
+  tier-4 task produces — a 0.048 deviation, by far the largest across all
+  90 computed `u`/`u_B`/`u_C` values (every other value is within 0.009 of
+  its tier's nominal target). `u_B` and `u_C` for task 19 are unaffected
+  (~0.75, as expected) since `Design K`/`Design L`'s payoffs for that task
+  are unremarkable. Left as-is (not corrected), consistent with how the
+  index 33 error above is handled — flagged here rather than silently
+  patched, since the actually-intended payoff value isn't recoverable.
