@@ -205,10 +205,13 @@ to each partner's own best-possible payoff) instead of the 3-category
 outcome, and independently reaches the same conclusions — including using
 a proper (non-variational-Bayes) linear mixed model, which agrees closely
 with GEE on every `arm`/difficulty term, confirming the earlier VB
-discrepancy was specific to the binary-outcome model. Also checks a pair's
-average pre-task social closeness (positive but inconclusive trend — the
-two models disagree on significance, unlike everywhere else in this
-notebook) and a `log_round` trend (no detectable effect, dropped).
+discrepancy was specific to the binary-outcome model. A risk-dominance
+sensitivity check (`outcome_analysis_selected_u.ipynb`'s `R`/`diff_u`
+covariates) reproduces the buffering interaction — the one place the two
+models disagree on an `arm` term here, resolved in GEE's favor. Also
+checks a pair's average pre-task social closeness (positive but
+inconclusive trend — the two models disagree on significance) and a
+`log_round` trend (no detectable effect, dropped).
 
 `analysis/belief_analysis.ipynb` runs a third outcome analysis on
 `collabBelief` (each partner's own stated belief their partner will

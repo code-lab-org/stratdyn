@@ -361,6 +361,25 @@ classification. The pair-level aggregate test is weaker here (Mann-Whitney
 p = 0.12) than its categorical counterpart (p = 0.064) — plausible, since
 `E` absorbs extra variance from the *size* of losses, not just win/loss.
 
+**Sensitivity check: risk dominance (`u`/`R`) instead of task difficulty.**
+Mirrors `outcome_analysis_selected_u.ipynb`'s substitution: `R_c` (average
+log-odds risk threshold of each partner's *actually selected* design) and
+`diff_u_c` in place of `max_difficulty_c`/`diff_difficulty_c`. `arm:R_c`
+is the first term in this notebook where `MixedLM` and GEE disagree
+(MixedLM p = 0.011, GEE p = 0.131) — likely `E`'s sharply unequal variance
+across outcomes (sd ≈ 0.12 for successful collaboration, 0.30 for
+coordination failure) violating `MixedLM`'s homoskedasticity assumption in
+a way GEE's sandwich SE isn't sensitive to; dropped per this analysis's
+convention of trusting GEE for `arm`-involving terms. The buffering
+interaction replicates: `arm:diff_u_c` MixedLM coef 0.750 (p = 0.011), GEE
+coef 0.796 (p = 0.030), with an effective treatment-arm slope near flat
+(~-0.06 to -0.07) against a clearly negative control-arm slope (`diff_u_c`
+-0.82/-0.86, p < 0.001 in both — cleaner than `diff_difficulty_c`'s
+non-significant p ≈ 0.24 alone). `R_c` (p < 0.001 in both) and `arm`'s
+null main effect (p ≈ 0.16-0.18) are unchanged. A fourth independent
+confirmation of the buffering pattern, now under a covariate built from
+real selected-design payoffs.
+
 Also checks `avg_social_closeness` (each pair's average of both partners'
 pre-task "how well do you know your partner" rating, from
 `survey_data.csv`) — another pair-level covariate, like `arm`. It shows a
