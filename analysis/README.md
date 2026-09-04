@@ -297,6 +297,24 @@ collaborative design to reference, falls back to the task's own canonical
   purely exogenous `task_difficulty` version is reassuring against the
   endogeneity caveat above — it suggests this refines the same real
   relationship rather than surfacing a different, self-selected one.
+- **Sensitivity check: risk dominance (`R`) instead of `max_u`.** `max_u`
+  and `diff_u` correlate at r ≈ 0.35 — not by mathematical necessity, but
+  plausibly a consequence of the experiment's structured (non-random) task
+  pairing. Swapping in `R` (the average log-odds risk threshold from
+  `risk_dominance_analysis.ipynb`, r ≈ -0.17 with `diff_u_c`) in place of
+  `max_u_c` changes the picture: the buffering interaction
+  (`arm:diff_u_c`, coef -5.80, p = 0.028) and the "overall risk predicts
+  mutual independence, not coordination failure" result both survive
+  unchanged, but `diff_u_c` turns out to significantly predict mutual
+  independence too (coef 5.60, p = 0.005 — previously p = 0.931 with
+  `max_u_c` in the model). The clean "mismatch → coordination failure
+  only, overall risk → mutual independence only" split was partly an
+  artifact of `max_u_c` absorbing shared variance with `diff_u_c`; with a
+  less-entangled covariate, mismatch looks like a general risk-elevating
+  factor rather than a coordination-failure-specific mechanism. This
+  caveat likely applies to `outcome_analysis.ipynb`'s original
+  `max_difficulty_c`/`diff_difficulty_c` split too, not just this
+  notebook's version.
 
 ## `efficiency_analysis.ipynb`
 

@@ -189,7 +189,14 @@ highest-upside design) and fixes the task-19 anomaly automatically with no
 manual correction, while reproducing the same mechanistic split and
 buffering interaction found with task difficulty — reassurance that the
 earlier results reflect a real relationship rather than an artifact of the
-coarser covariate.
+coarser covariate. A follow-up sensitivity check swaps in risk dominance
+(`R`, the average rather than the max of the two partners' thresholds,
+less correlated with the mismatch covariate) and finds the buffering
+interaction holds up, but the clean "mismatch causes coordination failure
+only" mechanistic split does not — mismatch turns out to predict mutual
+independence too once `max_u`'s collinearity with it is removed, a caveat
+that likely applies to `outcome_analysis.ipynb`'s original difficulty
+version as well.
 
 `analysis/efficiency_analysis.ipynb` runs the same style of analysis on a
 continuous efficiency measure (`E`, each round's realized payoff relative
