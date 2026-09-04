@@ -92,7 +92,19 @@ partner) — broken out by `arm` and for the population as a whole.
 `demographics-survey-q3` (education) is excluded. See the notebook's own
 markdown cells for the specific cleaning decisions (a few `q63`/`q7`
 responses are the literal string `"undefined"` and are excluded from the
-numeric summaries rather than guessed at).
+numeric summaries rather than guessed at). The summary table reports each
+item's own sample size (`Age (N)`, `English proficiency (N)`,
+`Social closeness (N)`) alongside its min/mean/max, since the arm's total
+participant count (`N`) can overstate how many actually answered a given
+item — `english_proficiency` and `social_closeness` are each short by one
+response per arm.
+
+It also reports outcome descriptives from `task_data.csv`: valid outcome
+count (778 of 780 rounds, 2 dropped for an undefined strategy) and the
+three-category outcome frequency (successful collaboration, mutual
+independence, coordination failure) by arm and overall — the same
+classification and counts as the top of `outcome_analysis.ipynb`, included
+here as a plain descriptive summary without the inferential tests.
 
 `task_difficulty` and `payoff_magnitude` together form a 6×5 factorial
 design covering all 30 real tasks exactly once: `V_A_CC` cycles through

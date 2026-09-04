@@ -136,7 +136,10 @@ its 6×5 difficulty/payoff-magnitude factorial grouping. See
 `analysis/descriptive_statistics.ipynb` covers demographic descriptive
 statistics (gender counts, min/mean/max age, English proficiency, and
 social closeness) by study arm and overall, built on
-`analysis/survey_data.csv`.
+`analysis/survey_data.csv`. It also reports outcome descriptives from
+`analysis/task_data.csv`: the valid-outcome count and the three-category
+outcome frequency (successful collaboration, mutual independence,
+coordination failure) by arm and overall.
 
 `analysis/outcome_analysis.ipynb` covers task-round outcomes, built on
 `analysis/task_data.csv`. Each round is classified as successful
