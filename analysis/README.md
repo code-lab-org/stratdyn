@@ -458,27 +458,61 @@ is also significant (GEE p = 0.002): the penalty compounds with difficulty
 rather than being constant — barely detectable at an easy task, substantial
 at a hard one. `arm:own_magnitude_c` was tested and dropped (p = 0.326) —
 the treatment doesn't change this relationship, unlike the difficulty-
-mismatch buffering effect. All three magnitude terms hold up unchanged when
-`partner_belief` is added below, and none of the difficulty/belief results
-above are disturbed by adding magnitude.
+mismatch buffering effect. None of the difficulty/belief results above are
+disturbed by adding magnitude.
 
-**Does the partner's belief predict a participant's own choice?** A
-participant's belief can only reach their partner via the robot's info
+**Sensitivity check: risk dominance (`u`/`R`) instead of task difficulty.**
+Mirrors `outcome_analysis_selected_u.ipynb`'s substitution: `R_c` (average
+log-odds risk threshold of each partner's *actually selected* design) and
+`diff_u_c` in place of `max_difficulty_c`/`diff_difficulty_c` in the
+belief-predicts-strategy model, carrying `own_magnitude_c` over from the
+earlier section too. `arm:R_c`, `arm:own_magnitude_c`, and
+`R_c:own_magnitude_c` are all tested and dropped (p = 0.334, 0.371, 0.098
+respectively) — unlike `max_difficulty_c:own_magnitude_c` (p = 0.002) in
+the earlier section, the magnitude-compounds-with-difficulty refinement
+doesn't clearly replicate under this measure, though `own_magnitude_c`'s
+own main effect does (GEE coef -0.118, p < 0.001). The buffering
+interaction replicates too: `arm:diff_u_c` GEE coef 5.41, p = 0.019
+(mixed model agrees in sign), with an effective treatment-arm slope near
+flat (~-0.13) against a clearly negative control-arm slope (-5.54,
+p = 0.005 — cleaner than `diff_difficulty_c`'s non-significant p = 0.67
+alone). `collabBelief_c` and `arm`'s null main effect are unchanged. This
+is a fourth independent confirmation of the buffering pattern at the
+individual-choice level, now under a covariate built from real
+selected-design payoffs rather than assigned task difficulty.
+
+The parallel question — whether a participant's *partner's* belief
+predicts their choice — is split into `partner_belief_analysis.ipynb`,
+since it's a distinct question (about the belief-sharing mechanism) that
+depends on this notebook's models as controls rather than extending them.
+
+## `partner_belief_analysis.ipynb`
+
+A companion to `belief_analysis.ipynb`, split out because it asks a
+distinct question: not whether a participant's *own* stated belief
+predicts their own choice (established there), but whether their
+*partner's* stated belief does. Reproduces `belief_analysis.ipynb`'s data
+setup (reshape, difficulty/magnitude/risk-dominance covariates) in one
+condensed cell, then tests `partner_belief_c` against both of that
+notebook's models — the `max_difficulty_c`-based one and the `R_c`-based
+sensitivity check — as controls.
+
+A participant's belief can only reach their partner via the robot's info
 modal (`"Partner Belief = " + partnerCollabBelief`), a treatment-only
 mechanism — so `partner_belief_c` is interacted with `arm` rather than
 added as a main effect, expecting it to matter only where that channel
-exists. `chose_C ~ collabBelief_c + partner_belief_c * arm +
-max_difficulty_c + diff_difficulty_c + arm:diff_difficulty_c +
-own_magnitude_c + max_difficulty_c:own_magnitude_c` confirms exactly that:
-`partner_belief_c` alone (the control-arm slope) is not significant (GEE
-p = 0.144, as expected with no sharing mechanism), while
-`partner_belief_c:arm` is significant (GEE p = 0.004, mixed model
-corroborates) — an effective treatment-arm slope (≈ 0.043) comparable in
-size to a participant's own belief. A clean internal-consistency check:
-the one arm with a plausible channel for partner belief to matter is the
-one where it does. It can't confirm a participant saw their partner's
-belief any *specific* round, though — only that they were in the arm where
-it was possible.
+exists. Both specifications agree: `partner_belief_c` alone (the
+control-arm slope) is not significant (p = 0.144 and p = 0.137, as
+expected with no sharing mechanism), while `partner_belief_c:arm` is
+significant in both (GEE p = 0.004 each, mixed model corroborates) — an
+effective treatment-arm slope (≈0.043 and ≈0.044) comparable in size to a
+participant's own belief effect, and essentially identical across both
+covariate specifications. A clean internal-consistency check: the one arm
+with a plausible channel for partner belief to matter is the one where it
+does, and the result isn't an artifact of how task difficulty happens to
+be measured. It can't confirm a participant saw their partner's belief any
+*specific* round, though — only that they were in the arm where it was
+possible.
 
 ## `risk_dominance_analysis.ipynb`
 

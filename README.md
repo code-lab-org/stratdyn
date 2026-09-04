@@ -68,6 +68,7 @@ analysis/               Scripts for turning results/ into analysis-ready tables
   outcome_analysis.ipynb        Task-round outcome frequency by arm
   efficiency_analysis.ipynb     Numeric efficiency counterpart to the above
   belief_analysis.ipynb         Stated collaboration-belief counterpart
+  partner_belief_analysis.ipynb Does a partner's belief predict choice?
   risk_dominance_analysis.ipynb Success rate vs. risk dominance, by arm
   robot_use_analysis.ipynb      Robot use over time and after failed rounds
   belief_manipulation_analysis.ipynb  Flags participants whose stated
@@ -230,12 +231,22 @@ model with `payoff_magnitude` — which scales a task's stakes while holding
 its relative risk fixed — and finds a real, independent risk-aversion
 effect: bigger stakes reduce collaboration even at the same relative risk,
 an effect that compounds with task difficulty and isn't touched by `arm`.
-Finally, since a participant's belief can only reach their partner via the
-robot (a treatment-only mechanism), it tests `partner_belief` interacted
-with `arm`: not significant in control (no sharing channel exists),
-significant in treatment (effect size comparable to a participant's own
-belief) — a clean internal-consistency check on the belief-sharing
-mechanism, unaffected by adding the magnitude terms.
+A sensitivity check substitutes `outcome_analysis_selected_u.ipynb`'s
+risk-dominance covariates (`R`/`diff_u`, built from each partner's
+actually-selected design) for task difficulty in the belief-predicts-
+strategy model, and the buffering interaction replicates — a fourth
+independent confirmation of that pattern.
+
+`analysis/partner_belief_analysis.ipynb` is a companion notebook (split
+out from `belief_analysis.ipynb`) asking the parallel question: since a
+participant's belief can only reach their partner via the robot (a
+treatment-only mechanism), does the *partner's* belief predict a
+participant's choice? Tests `partner_belief` interacted with `arm`,
+against both of `belief_analysis.ipynb`'s models as controls: not
+significant in control (no sharing channel exists), significant in
+treatment (effect size comparable to a participant's own belief) under
+both covariate specifications — a clean internal-consistency check on the
+belief-sharing mechanism.
 
 `analysis/risk_dominance_analysis.ipynb` plots all three outcome rates
 (successful collaboration, mutual independence, coordination failure)
