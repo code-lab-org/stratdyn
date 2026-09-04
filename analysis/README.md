@@ -296,7 +296,16 @@ collaborative design to reference, falls back to the task's own canonical
   qualitative agreement between this revealed-choice measure and the
   purely exogenous `task_difficulty` version is reassuring against the
   endogeneity caveat above — it suggests this refines the same real
-  relationship rather than surfacing a different, self-selected one.
+  relationship rather than surfacing a different, self-selected one. Also
+  explicitly tests `arm:R_c` (does the treatment change the relationship
+  between *overall* risk and outcome, the interaction
+  `risk_dominance_analysis.ipynb`'s descriptive plot visually suggests) —
+  not significant for either contrast (p = 0.623, p = 0.455); that
+  notebook's plot doesn't cluster by pair or control for `diff_u`, so the
+  apparent visual divergence there is likely attributable to those
+  omissions rather than a real `arm:R` effect. `arm:diff_u_c` remains
+  significant for coordination failure (p = 0.019) with `arm:R_c` in the
+  model, and is the one kept for the final, more parsimonious model.
 - **Sensitivity check: risk dominance (`R`) instead of `max_u`.** `max_u`
   and `diff_u` correlate at r ≈ 0.35 — not by mathematical necessity, but
   plausibly a consequence of the experiment's structured (non-random) task
