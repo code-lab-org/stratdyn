@@ -632,46 +632,56 @@ encourage their partner to collaborate, then choosing `I` themselves
 anyway. This is a viable exploit specifically because `V_Y` doesn't depend
 on the partner's choice, so it's never costly to the person doing it.
 
-Rather than an arbitrary threshold, reuses each task's `u` (the risk-
-dominance threshold from `risk_dominance_analysis.ipynb`) as the natural
-cutoff: `belief_favors_C` = the participant's own `collabBelief >= 100 *
-u_own` (their own task's payoffs implied collaborating was the rational
-bet). `inconsistent_exploit` = `belief_favors_C` but the participant chose
-`I` anyway. Uses `u_own` (the participant's own task), not the round's
-paired `R`, since `R` mixes in the partner's task difficulty, which the
-participant reporting the belief can't act on for their own payoff
-calculation.
+Reuses each task's `u` (the risk-dominance threshold from
+`risk_dominance_analysis.ipynb`) — but as a continuous signed magnitude,
+not a threshold crossing: `deviation = collabBelief - 100 * u_own` for
+every (participant, round). An earlier version of this notebook collapsed
+`deviation` to a binary `belief_favors_C` flag (`deviation >= 0`) and
+counted co-occurrences with choosing `I`; that discarded the *size* of the
+overshoot and couldn't distinguish "barely inconsistent" from "wildly
+inconsistent." `exploit_score` = `deviation` when the participant chose
+`I` and `deviation > 0`, else `0` — zero for every non-exploitative round,
+scaling with overshoot otherwise — averaged over **all 30 of a
+participant's rounds** (not just their `I`-choice rounds), so it stays
+well-defined (at `0`) even for participants who never chose `I` at all.
+Uses `u_own` (the participant's own task), not the round's paired `R`,
+since `R` mixes in the partner's task difficulty, which the participant
+reporting the belief can't act on for their own payoff calculation.
 
-- **Base rates** (n = 840 participant-round observations): 81.0% of rounds
-  had `belief_favors_C`; of those, 7.9% (54) were followed by `I` anyway
-  (`inconsistent_exploit`). For contrast, the reverse pattern
-  (`inconsistent_generous` — belief favored `I`, participant chose `C`
-  anyway) is far more common relative to its opportunity: 51.2% (82 of
-  160) — participants default toward collaborating more than their own
-  stated belief implies, the opposite of a manipulative pattern.
-- **Individual flagging**: for each of the 28 treatment participants, an
-  exact one-sided binomial test compares their `inconsistent_exploit` rate
-  (among their own `belief_favors_C` rounds) against a leave-one-out
-  population baseline, with FDR correction across the 28 tests. Three
-  participants survive correction: `user0031` (14/30, 46.7%), `user0042`
-  (10/25, 40.0%), `user0048` (8/16, 50.0%). Two more are elevated but don't
-  survive correction (`user0049` 4/12, `user0050` 4/13, p_adj ≈ 0.07 each).
-  18 of the 28 participants show zero inconsistent rounds.
-- **Corroboration**: a participant's `inconsistent_exploit` rate correlates
-  strongly with their pair's overall success rate (Pearson r = -0.888,
-  p < 0.001) — partly definitional (an `I` choice can't be part of a `C`/`C`
-  round), but the three flagged participants' *identities* line up, using
-  entirely different data, with pairs already flagged elsewhere: `user0031`
-  is from `user0031_user0032`, the `outcome_analysis.ipynb` robustness-check
-  pair that behaved like control despite treatment assignment and is one of
-  only two treatment pairs with 0% robot use; `user0042` and `user0048` are
-  from `user0041_user0042` and `user0047_user0048`, the treatment arm's
-  highest (100%) and third-highest (73.3%) robot-use pairs, both among its
-  three lowest success rates.
+- **Base rates** (n = 840 participant-round observations): 6.4% (54)
+  had a positive `exploit_score`, averaging 20.2 belief-points of overshoot
+  when it occurred. For contrast, the reverse pattern (`generous_score` —
+  belief favored `I`, participant chose `C` anyway) is more common: 9.8%
+  (82) of rounds — participants default toward collaborating more than
+  their own stated belief implies, the opposite of a manipulative pattern.
+- **Individual flagging**: for each of the 28 treatment participants, a
+  one-sided Mann-Whitney U test compares their round-level `exploit_score`
+  (all 30 rounds) against a leave-one-out population baseline — chosen
+  over a t-test or binomial test since `exploit_score` is heavily
+  zero-inflated and right-skewed — with FDR correction across the 28
+  tests. Three participants survive correction: `user0031` (mean 10.27,
+  14/30 positive rounds), `user0042` (mean 8.59, 10/30), `user0048` (mean
+  6.25, 8/30) — the same three flagged by the earlier binary version, now
+  with a magnitude-sensitive ranking among them rather than a tie. Three
+  more are elevated but don't survive correction (`user0061`, `user0050`
+  p_adj ≈ 0.34; `user0049` p_adj ≈ 0.37). 18 of the 28 participants score
+  exactly `0` on every round.
+- **Corroboration**: a participant's `mean_exploit` correlates strongly
+  with their pair's overall success rate (Pearson r = -0.685, p < 0.001;
+  Spearman r = -0.941, p < 0.001 — the more appropriate summary given the
+  zero-inflation) — stronger than the earlier binary version's Pearson
+  r = -0.888. Part of this is close to definitional (an `I` choice can't be
+  part of a `C`/`C` round), but the three flagged participants' *identities*
+  line up, using entirely different data, with pairs already flagged
+  elsewhere: `user0031` is from `user0031_user0032`, the
+  `outcome_analysis.ipynb` robustness-check pair that behaved like control
+  despite treatment assignment and is one of only two treatment pairs with
+  0% robot use; `user0042` and `user0048` are from `user0041_user0042` and
+  `user0047_user0048`, the treatment arm's highest (100%) and third-highest
+  (73.3%) robot-use pairs, both among its three lowest success rates.
 - **Caveats**: this flags patterns consistent with manipulation, not
-  intent — `u_own` assumes a stylized expected-value-maximizing model, the
-  binomial test treats a participant's own rounds as independent (likely
-  understating true variability if the behavior is serially correlated),
-  and per-participant power varies a lot (7-30 favorable rounds). Best read
-  as a data-driven shortlist for closer qualitative review, not a final
-  determination of who manipulated whom.
+  intent — `u_own` assumes a stylized expected-value-maximizing model, and
+  the Mann-Whitney test treats a participant's own rounds as independent
+  (likely understating true variability if the behavior is serially
+  correlated). Best read as a data-driven shortlist for closer qualitative
+  review, not a final determination of who manipulated whom.

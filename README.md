@@ -278,12 +278,16 @@ mechanism found in `belief_analysis.ipynb`: reporting a `collabBelief`
 high enough to imply they'd collaborate, then choosing `I` anyway — viable
 because `V_Y` doesn't depend on the partner's choice, so it's never costly
 to the person doing it. Uses each task's risk-dominance threshold `u` (from
-`risk_dominance_analysis.ipynb`) as a natural, non-arbitrary cutoff for
-"belief implied collaborating was rational," then flags individual
-participants whose rate of choosing `I` despite that implication is
-significantly above the group baseline (exact binomial test, FDR-corrected
-across 28 participants). Three participants are flagged; the behavior is
-otherwise rare (18 of 28 participants show none at all). Notably, the three
+`risk_dominance_analysis.ipynb`) not as an arbitrary cutoff but as a
+continuous signed magnitude — `deviation = collabBelief - 100*u_own` — so
+a participant's `exploit_score` scales with *how much* their stated belief
+overshot what their own payoffs required to justify collaborating, not
+just whether it crossed a line. Flags individual participants whose
+round-level `exploit_score` is significantly above the group baseline
+(one-sided Mann-Whitney U, appropriate for the heavily zero-inflated
+score, FDR-corrected across 28 participants). Three participants are
+flagged; the behavior is otherwise rare (18 of 28 participants score `0`
+throughout). Notably, the three
 flagged participants' pairs were independently flagged in two earlier
 notebooks using unrelated data — as the non-adopter pair that behaved like
 control despite treatment assignment, and as the two heaviest-robot-use,
